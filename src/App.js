@@ -41,7 +41,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        {/* <ul id="pokemonSelection">
+        <ul id="pokemonSelection">
           {PokemonList.map((pokemon, index) =>
             <li className="selector" data-selected={SelectedPokemonIndex === index} key={index} onClick={() => this.getPokemonInfo(pokemon.url, index)}>{pokemon.name}</li>
           )}
@@ -50,9 +50,9 @@ class App extends React.Component {
           <section id="pokemonInfoPanel">
             <Panel name={PokemonList[SelectedPokemonIndex].name} info={SelectedPokemonInfo}></Panel>
           </section>
-        } */}
+        }
 
-        <table id="head">
+        {/* <table id="head">
         <thead>
             <tr>
               <th>Index</th>
@@ -69,7 +69,7 @@ class App extends React.Component {
               </tr>
             )}
           </tbody>
-        </table>
+        </table> */}
         
       </div>
     );
