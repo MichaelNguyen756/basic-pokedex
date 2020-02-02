@@ -1,83 +1,76 @@
-import React from 'react';
+import React, { useReducer, useEffect } from 'react';
+import styled from 'styled-components';
 import Panel from './components/Panel';
+import SelectionMenu from './components/SelectionMenu';
+import SelectionItem from './components/SelectionItem';
+import InfoPanel from './components/InfoPanel';
 
-import './App.css';
+import { initialState, UPDATE_INFO, UPDATE_LIST, Reducer } from './reducers/App';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const StyledApp = styled.div`
+  text-align: center;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+`;
 
-    this.state = {
-      PokemonList: [],
-      SelectedPokemonIndex: null,
-      SelectedPokemonInfo: {}
-    };
-
-    this.getPokemonInfo = this.getPokemonInfo.bind(this);
-  }
-
-  componentWillMount() {
-    GetPokemonAPIJSON('https://pokeapi.co/api/v2/pokemon?limit=151')
-    .then(resultObj => {
-      this.setState({ PokemonList: resultObj.results })
-    })
-    .catch(() => console.error('Error fetching Pokemon API Resource'));
-  }
-
-  getPokemonInfo(url, index) {
-    GetPokemonAPIJSON(url)
-    .then(resultObj => {
-      this.setState({ SelectedPokemonIndex: index, SelectedPokemonInfo: resultObj })
-    })
-    .catch(() => console.error('Error fetching Pokemon Info'))
-  }
-
-  render() {
-    const {
-      PokemonList,
-      SelectedPokemonIndex,
-      SelectedPokemonInfo
-    } = this.state;
-
-    return (
-      <div className="App">
-        <ul id="pokemonSelection">
-          {PokemonList.map((pokemon, index) =>
-            <li className="selector" data-selected={SelectedPokemonIndex === index} key={index} onClick={() => this.getPokemonInfo(pokemon.url, index)}>{pokemon.name}</li>
-          )}
-        </ul>
-        {SelectedPokemonIndex !== null && PokemonList.length > 0 &&
-          <section id="pokemonInfoPanel">
-            <Panel name={PokemonList[SelectedPokemonIndex].name} info={SelectedPokemonInfo}></Panel>
-          </section>
-        }
-
-        {/* <table id="head">
-        <thead>
-            <tr>
-              <th>Index</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-        </table>
-        <table>
-          <tbody>
-            {PokemonList.map((o, index) => 
-              <tr>
-                <td>{index}</td>
-                <td>{o.name}</td>
-              </tr>
-            )}
-          </tbody>
-        </table> */}
-        
-      </div>
-    );
-  }
+async function GetPokemonAPIJSON(url) {
+  const response = await fetch(url);
+  return response.json();
 }
 
-function GetPokemonAPIJSON(url) {
-  return fetch(url).then(response => response.json())
+function App() {
+  const [state, dispatch] = useReducer(Reducer, initialState);
+
+  const getPokemonInfo = async (url, index) => {
+    try {
+      const resultObj = await GetPokemonAPIJSON(url);  
+      dispatch({ type: UPDATE_INFO, payload: { index: index, info: resultObj }})
+    } catch {
+      console.error('Error fetching Pokemon Info')
+    }
+  }
+
+  const updateList = async () => {
+    try {
+      const resultObj = await GetPokemonAPIJSON('https://pokeapi.co/api/v2/pokemon?limit=151');
+      dispatch({type: UPDATE_LIST, payload: resultObj.results});
+    } catch {
+      console.error('Error fetching Pokemon API Resource')
+    }
+  }
+  
+  // Once rendered for the first time, then load the initial list once
+  useEffect(() => { updateList(); }, []);
+
+  return (
+    <StyledApp>
+      <SelectionMenu>
+        {state.PokemonList.map((pokemon, index) =>
+          <SelectionItem
+            isSelected={state.SelectedPokemonIndex === index}
+            key={index}
+            onClickHandler={() => getPokemonInfo(pokemon.url, index)}
+          >
+            {pokemon.name}
+          </SelectionItem>
+        )}
+      </SelectionMenu>
+      <InfoPanel>
+        {state.SelectedPokemonIndex != null && state.PokemonList.length > 0 &&
+          <Panel
+            name={state.PokemonList[state.SelectedPokemonIndex].name}
+            info={state.SelectedPokemonInfo}
+          />
+        }
+      </InfoPanel>
+    </StyledApp>
+  );
 }
 
 export default App;
