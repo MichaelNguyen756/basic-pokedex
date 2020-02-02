@@ -19,6 +19,11 @@ const StyledApp = styled.div`
   box-sizing: border-box;
 `;
 
+async function GetPokemonAPIJSON(url) {
+  const response = await fetch(url);
+  return response.json();
+}
+
 function App() {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
@@ -66,11 +71,6 @@ function App() {
       </InfoPanel>
     </StyledApp>
   );
-}
-
-async function GetPokemonAPIJSON(url) {
-  const response = await fetch(url);
-  return response.json();
 }
 
 export default App;
