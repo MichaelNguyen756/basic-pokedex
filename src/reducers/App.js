@@ -12,7 +12,10 @@ export function Reducer(state = initialState, action) {
         case UPDATE_LIST:
             return Object.assign({}, state, { PokemonList: action.payload });
         case UPDATE_INFO:
-        return Object.assign({}, state, { SelectedPokemonIndex: action.payload.index, SelectedPokemonInfo: action.payload.info });
+        return Object.assign({}, state, {
+            SelectedPokemonIndex: action.payload.index,
+            SelectedPokemonInfo: action.payload.info
+        });
         default:
             return state;
     }

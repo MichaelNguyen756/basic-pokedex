@@ -4,12 +4,12 @@ function InfoRow({rowTitle, infoList, listType}) {
     return (
         <tr>
             <th>{rowTitle}:</th>
-            <td>{GetNames(infoList, listType)}</td>
+            <td>{getNames(infoList, listType)}</td>
         </tr>
     );
 }
 
-function GetNames(objectList, objectType){
+function getNames(objectList, objectType){
     return objectList.map(obj => obj[objectType].name).join(", ");
 }
 

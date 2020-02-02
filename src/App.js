@@ -1,47 +1,76 @@
 import React, { useReducer, useEffect } from 'react';
+import styled from 'styled-components';
 import Panel from './components/Panel';
-
-import './styles/App.css';
+import SelectionMenu from './components/SelectionMenu';
+import SelectionItem from './components/SelectionItem';
+import InfoPanel from './components/InfoPanel';
 
 import { initialState, UPDATE_INFO, UPDATE_LIST, Reducer } from './reducers/App';
+
+const StyledApp = styled.div`
+  text-align: center;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+`;
 
 function App() {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
-  const getPokemonInfo = (url, index) => {
-    GetPokemonAPIJSON(url)
-    .then(resultObj => {
+  const getPokemonInfo = async (url, index) => {
+    try {
+      const resultObj = await GetPokemonAPIJSON(url);  
       dispatch({ type: UPDATE_INFO, payload: { index: index, info: resultObj }})
-    })
-    .catch(() => console.error('Error fetching Pokemon Info'))
+    } catch {
+      console.error('Error fetching Pokemon Info')
+    }
+  }
+
+  const updateList = async () => {
+    try {
+      const resultObj = await GetPokemonAPIJSON('https://pokeapi.co/api/v2/pokemon?limit=151');
+      dispatch({type: UPDATE_LIST, payload: resultObj.results});
+    } catch {
+      console.error('Error fetching Pokemon API Resource')
+    }
   }
   
-  useEffect(() => {
-    GetPokemonAPIJSON('https://pokeapi.co/api/v2/pokemon?limit=151')
-    .then(resultObj => {
-      dispatch({type: UPDATE_LIST, payload: resultObj.results});
-    })
-    .catch(() => console.error('Error fetching Pokemon API Resource'));
-  }, []);
+  // Once rendered for the first time, then load the initial list once
+  useEffect(() => { updateList(); }, []);
 
   return (
-    <div className="App">
-      <ul id="pokemonSelection">
+    <StyledApp>
+      <SelectionMenu>
         {state.PokemonList.map((pokemon, index) =>
-          <li className="selector" data-selected={state.SelectedPokemonIndex === index} key={index} onClick={() => getPokemonInfo(pokemon.url, index)}>{pokemon.name}</li>
+          <SelectionItem
+            isSelected={state.SelectedPokemonIndex === index}
+            key={index}
+            onClickHandler={() => getPokemonInfo(pokemon.url, index)}
+          >
+            {pokemon.name}
+          </SelectionItem>
         )}
-      </ul>
-      {state.SelectedPokemonIndex != null && state.PokemonList.length > 0 &&
-        <section id="pokemonInfoPanel">
-          <Panel name={state.PokemonList[state.SelectedPokemonIndex].name} info={state.SelectedPokemonInfo} />
-        </section>
-      }
-    </div>
+      </SelectionMenu>
+      <InfoPanel>
+        {state.SelectedPokemonIndex != null && state.PokemonList.length > 0 &&
+          <Panel
+            name={state.PokemonList[state.SelectedPokemonIndex].name}
+            info={state.SelectedPokemonInfo}
+          />
+        }
+      </InfoPanel>
+    </StyledApp>
   );
 }
 
-function GetPokemonAPIJSON(url) {
-  return fetch(url).then(response => response.json())
+async function GetPokemonAPIJSON(url) {
+  const response = await fetch(url);
+  return response.json();
 }
 
 export default App;

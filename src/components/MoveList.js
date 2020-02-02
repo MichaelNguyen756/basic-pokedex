@@ -2,12 +2,13 @@ import React from 'react';
 import _ from 'lodash';
 
 import Table from 'react-bootstrap/Table';
+import Title from './Title';
 import MoveRow from './MoveRow';
 
 function MoveList({moveList}) {
     return (
         <section className="poke-section">
-            <div className="title">Moves</div>
+            <Title/>
             <div className="move">
                 <Table bordered>
                     <thead>
