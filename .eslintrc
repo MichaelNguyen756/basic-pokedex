@@ -21,7 +21,8 @@
     "rules": {
         "strict": ["error", "never"],
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": ["off"]
     },
     "plugins": ["react-hooks", "babel"],
     "ignorePatterns": ["src/serviceWorker.js", "src/index.js"],
