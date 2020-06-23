@@ -18,14 +18,10 @@
     "css-loader": "3.2.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
-    "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-loader": "3.0.2",
     "eslint-plugin-flowtype": "3.13.0",
-    "eslint-plugin-import": "2.18.2",
     "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-react-hooks": "^1.6.1",
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.5",
@@ -65,7 +61,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -134,5 +131,15 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.3.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "eslint-plugin-standard": "^4.0.1"
   }
 }

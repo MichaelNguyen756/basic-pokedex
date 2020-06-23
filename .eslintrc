@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "jest": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2019,
+        "sourceType": "module"
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react-hooks/recommended"
+    ],
+    "rules": {
+        "strict": ["error", "never"],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
+    },
+    "plugins": [
+        "react-hooks"
+    ],
+    "ignorePatterns": ["src/serviceWorker.js", "src/index.js"]
+}
