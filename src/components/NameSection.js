@@ -11,7 +11,7 @@ const StyledNameSection = styled.div`
     background-color: brown;
 `;
 
-function NameSection({name}) {
+function NameSection({ name }) {
     return <StyledNameSection>{_.upperFirst(name)}</StyledNameSection>;
 }
 

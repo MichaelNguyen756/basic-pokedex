@@ -8,7 +8,7 @@ const StyledInfoPanel = styled.section`
     overflow-y: scroll;
 `;
 
-function InfoPanel({children}) {
+function InfoPanel({ children }) {
     return <StyledInfoPanel>{children}</StyledInfoPanel>;
 }
 

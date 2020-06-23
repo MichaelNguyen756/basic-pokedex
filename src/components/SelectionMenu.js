@@ -8,7 +8,7 @@ const StyledMenu = styled.ul`
     overflow-y: scroll;
 `;
 
-function SelectionMenu({children}) {
+function SelectionMenu({ children }) {
     return <StyledMenu>{children}</StyledMenu>;
 }
 

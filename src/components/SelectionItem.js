@@ -8,11 +8,11 @@ const StyledItem = styled.li`
     border-right: 1px #000000 solid;
     padding: 5px 10px;
 
-    ${props => props.isSelected &&
+    ${props =>
+        props.isSelected &&
         css`
             background-color: coral;
-        `
-    }
+        `}
 
     &:first-child {
         border-top: 1px #000000 solid;
@@ -24,9 +24,11 @@ const StyledItem = styled.li`
     }
 `;
 
-function SelectionItem({children, onClickHandler, isSelected}) {
+function SelectionItem({ children, onClickHandler, isSelected }) {
     return (
-        <StyledItem isSelected={isSelected} onClick={onClickHandler}>{children}</StyledItem>
+        <StyledItem isSelected={isSelected} onClick={onClickHandler}>
+            {children}
+        </StyledItem>
     );
 }
 
