@@ -5,10 +5,10 @@ import Table from 'react-bootstrap/Table';
 import Title from './Title';
 import MoveRow from './MoveRow';
 
-function MoveList({moveList}) {
+function MoveList({ moveList }) {
     return (
         <section className="poke-section">
-            <Title/>
+            <Title />
             <div className="move">
                 <Table bordered>
                     <thead>
@@ -18,9 +18,17 @@ function MoveList({moveList}) {
                         </tr>
                     </thead>
                     <tbody>
-                        {_.orderBy(getMoveList(moveList), ['levelAt'], ['asc']).map((moveObj, index) => 
-                            <MoveRow key={index} levelAt={moveObj.levelAt} moveName={moveObj.moveName}/>
-                        )}
+                        {_.orderBy(
+                            getMoveList(moveList),
+                            ['levelAt'],
+                            ['asc'],
+                        ).map((moveObj, index) => (
+                            <MoveRow
+                                key={index}
+                                levelAt={moveObj.levelAt}
+                                moveName={moveObj.moveName}
+                            />
+                        ))}
                     </tbody>
                 </Table>
             </div>
@@ -29,11 +37,19 @@ function MoveList({moveList}) {
 }
 
 function getMoveList(moveList) {
-    return moveList.filter(moveObj => moveObj.version_group_details.find(v => v.version_group.name === 'red-blue') !== undefined)
-    .map(m => ({
-        levelAt: m.version_group_details.find(v => v.version_group.name === 'red-blue').level_learned_at,
-        moveName: m.move.name
-    }));
+    return moveList
+        .filter(
+            moveObj =>
+                moveObj.version_group_details.find(
+                    v => v.version_group.name === 'red-blue',
+                ) !== undefined,
+        )
+        .map(m => ({
+            levelAt: m.version_group_details.find(
+                v => v.version_group.name === 'red-blue',
+            ).level_learned_at,
+            moveName: m.move.name,
+        }));
 }
 
 export default MoveList;

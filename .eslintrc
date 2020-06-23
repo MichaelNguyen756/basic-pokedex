@@ -14,15 +14,20 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react-hooks/recommended"
+        "eslint-config-prettier",
+        "plugin:react/recommended",
+        "prettier/react"
     ],
     "rules": {
         "strict": ["error", "never"],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn"
     },
-    "plugins": [
-        "react-hooks"
-    ],
-    "ignorePatterns": ["src/serviceWorker.js", "src/index.js"]
+    "plugins": ["react-hooks", "babel"],
+    "ignorePatterns": ["src/serviceWorker.js", "src/index.js"],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
 }

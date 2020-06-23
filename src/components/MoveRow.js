@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MoveRow({levelAt, moveName}) {
+function MoveRow({ levelAt, moveName }) {
     return (
         <tr>
             <td>{levelAt}</td>
