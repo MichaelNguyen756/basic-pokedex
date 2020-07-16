@@ -6,7 +6,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-table {
-  table-layout: fixed;
-}
