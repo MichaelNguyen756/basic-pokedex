@@ -5,7 +5,7 @@ import Table from 'react-bootstrap/Table';
 function StatTable({ statList }) {
     return (
         <section className="poke-section">
-            <div className="title">Stats</div>
+            <h2 className="title">Stats</h2>
             <div className="stat">
                 <Table bordered>
                     <tbody>
