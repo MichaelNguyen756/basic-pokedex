@@ -7,6 +7,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-table {
-  table-layout: fixed;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.poke-panel {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.name {
+  flex: 0 0 auto;
+}
+
+.poke-image {
+  flex: 1 1 0;
+}
+
+.poke-image svg {
+  height: 100%;
+  width: 100%;
+}
+
+.poke-image svg image {
+  height: 100%;
+  width: 100%;
 }
