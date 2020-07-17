@@ -1,9 +1,10 @@
 import React, { useReducer, useEffect } from 'react';
 
 import Panel from './components/Panel';
-import SelectionMenu from './components/SelectionMenu';
+import SelectionMenuSection from './components/SelectionMenuSection';
 import SelectionItem from './components/SelectionItem';
 import InfoPanel from './components/InfoPanel';
+import EmptySelectionSection from './components/EmptySelectionSection';
 import { GetPokemonJSONFromAPI } from './helpers/api';
 
 import StyledApp from './StyledApp';
@@ -30,7 +31,7 @@ function App() {
         }
     }
 
-    async function updateList() {
+    async function getInitialList() {
         try {
             const { results } = await GetPokemonJSONFromAPI();
             dispatch({ type: UPDATE_LIST, payload: results });
@@ -41,14 +42,15 @@ function App() {
 
     // Once rendered for the first time, then load the initial list once
     useEffect(() => {
-        updateList();
+        getInitialList();
     }, []);
 
     const { PokemonList, SelectedPokemonIndex, SelectedPokemonInfo } = state;
+    const hasSelection = SelectedPokemonIndex != null && PokemonList.length > 0;
 
     return (
         <StyledApp>
-            <SelectionMenu>
+            <SelectionMenuSection>
                 {PokemonList.map(({ url, name }, index) => (
                     <SelectionItem
                         isSelected={SelectedPokemonIndex === index}
@@ -58,14 +60,15 @@ function App() {
                         {name}
                     </SelectionItem>
                 ))}
-            </SelectionMenu>
-            <InfoPanel>
-                {SelectedPokemonIndex != null && PokemonList.length > 0 && (
+            </SelectionMenuSection>
+            <InfoPanel hasSelection={hasSelection}>
+                {hasSelection && (
                     <Panel
                         name={PokemonList[SelectedPokemonIndex].name}
                         info={SelectedPokemonInfo}
                     />
                 )}
+                {!hasSelection && <EmptySelectionSection />}
             </InfoPanel>
         </StyledApp>
     );

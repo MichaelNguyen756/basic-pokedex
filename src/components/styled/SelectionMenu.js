@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
 const SelectionMenu = styled.ul`
-    height: 100%;
-    padding-inline-start: 0px;
-    flex: 0 0 auto;
-    overflow-y: scroll;
+    padding-inline-start: 0;
+    margin-bottom: 0;
 `;
 
 export default SelectionMenu;

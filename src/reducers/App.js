@@ -8,13 +8,15 @@ export const UPDATE_LIST = 'UPDATE_LIST';
 export const UPDATE_INFO = 'UPDATE_INFO';
 
 export function Reducer(state = initialState, action) {
-    switch (action.type) {
+    //  Doing destructuring here to be explicit in the parameters about state and action
+    const { type, payload } = action;
+    switch (type) {
         case UPDATE_LIST:
-            return Object.assign({}, state, { PokemonList: action.payload });
+            return Object.assign({}, state, { PokemonList: payload });
         case UPDATE_INFO:
             return Object.assign({}, state, {
-                SelectedPokemonIndex: action.payload.index,
-                SelectedPokemonInfo: action.payload.info,
+                SelectedPokemonIndex: payload.index,
+                SelectedPokemonInfo: payload.info,
             });
         default:
             return state;

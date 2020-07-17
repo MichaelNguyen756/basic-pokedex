@@ -1,8 +1,9 @@
 import React from 'react';
-import StyledMenu from './styled/SelectionMenu';
+
+import StyledSelectionMenu from './styled/SelectionMenu';
 
 function SelectionMenu({ children }) {
-    return <StyledMenu>{children}</StyledMenu>;
+    return <StyledSelectionMenu>{children}</StyledSelectionMenu>;
 }
 
 export default SelectionMenu;
