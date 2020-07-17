@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
 
+import { borderSetting } from './commonValues';
+
 const InfoPanel = styled.section`
     flex: 1 1 0;
-    border: 1px #000000 solid;
+    border: ${borderSetting};
     height: 100%;
     overflow-y: scroll;
 

@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
 
+import { borderSetting } from './commonValues';
+
 const SelectionItem = styled.li`
-    border-bottom: 1px #000000 solid;
+    border-bottom: ${borderSetting};
     list-style: none;
-    border-left: 1px #000000 solid;
-    border-right: 1px #000000 solid;
+    border-left: ${borderSetting};
+    border-right: ${borderSetting};
     padding: 5px 10px;
 
     ${({ isSelected }) =>
@@ -14,7 +16,7 @@ const SelectionItem = styled.li`
         `}
 
     &:first-child {
-        border-top: 1px #000000 solid;
+        border-top: ${borderSetting};
     }
 
     &:hover {
