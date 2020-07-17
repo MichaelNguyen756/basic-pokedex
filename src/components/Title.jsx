@@ -1,13 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const StyledTitle = styled.h2`
-    /* font-size: 1.6em;
-    font-weight: bold; */
-`;
 
 function Title() {
-    return <StyledTitle>Moves</StyledTitle>;
+    return <h2>Moves</h2>;
 }
 
 export default Title;

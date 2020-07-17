@@ -1,9 +1,12 @@
 import React, { useReducer, useEffect } from 'react';
-import styled from 'styled-components';
+
 import Panel from './components/Panel';
 import SelectionMenu from './components/SelectionMenu';
 import SelectionItem from './components/SelectionItem';
 import InfoPanel from './components/InfoPanel';
+import { GetPokemonJSONFromAPI } from './helpers/api';
+
+import StyledApp from './StyledApp';
 
 import {
     initialState,
@@ -12,80 +15,57 @@ import {
     Reducer,
 } from './reducers/App';
 
-const StyledApp = styled.div`
-    text-align: center;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    height: 100vh;
-    width: 100vw;
-    box-sizing: border-box;
-`;
-
-async function GetPokemonAPIJSON(url) {
-    const response = await fetch(url);
-    return response.json();
-}
-
 function App() {
     const [state, dispatch] = useReducer(Reducer, initialState);
 
-    const getPokemonInfo = async (url, index) => {
+    async function getPokemonInfo(url, index) {
         try {
-            const resultObj = await GetPokemonAPIJSON(url);
+            const resultObj = await GetPokemonJSONFromAPI(url);
             dispatch({
                 type: UPDATE_INFO,
-                payload: { index: index, info: resultObj },
+                payload: { index, info: resultObj },
             });
         } catch {
             console.error('Error fetching Pokemon Info');
         }
-    };
+    }
 
-    const updateList = async () => {
+    async function updateList() {
         try {
-            const resultObj = await GetPokemonAPIJSON(
-                'https://pokeapi.co/api/v2/pokemon?limit=151',
-            );
-            dispatch({ type: UPDATE_LIST, payload: resultObj.results });
+            const { results } = await GetPokemonJSONFromAPI();
+            dispatch({ type: UPDATE_LIST, payload: results });
         } catch {
             console.error('Error fetching Pokemon API Resource');
         }
-    };
+    }
 
     // Once rendered for the first time, then load the initial list once
     useEffect(() => {
         updateList();
     }, []);
 
+    const { PokemonList, SelectedPokemonIndex, SelectedPokemonInfo } = state;
+
     return (
         <StyledApp>
             <SelectionMenu>
-                {state.PokemonList.map((pokemon, index) => (
+                {PokemonList.map(({ url, name }, index) => (
                     <SelectionItem
-                        isSelected={state.SelectedPokemonIndex === index}
+                        isSelected={SelectedPokemonIndex === index}
                         key={index}
-                        onClickHandler={() =>
-                            getPokemonInfo(pokemon.url, index)
-                        }
+                        onClickHandler={() => getPokemonInfo(url, index)}
                     >
-                        {pokemon.name}
+                        {name}
                     </SelectionItem>
                 ))}
             </SelectionMenu>
             <InfoPanel>
-                {state.SelectedPokemonIndex != null &&
-                    state.PokemonList.length > 0 && (
-                        <Panel
-                            name={
-                                state.PokemonList[state.SelectedPokemonIndex]
-                                    .name
-                            }
-                            info={state.SelectedPokemonInfo}
-                        />
-                    )}
+                {SelectedPokemonIndex != null && PokemonList.length > 0 && (
+                    <Panel
+                        name={PokemonList[SelectedPokemonIndex].name}
+                        info={SelectedPokemonInfo}
+                    />
+                )}
             </InfoPanel>
         </StyledApp>
     );

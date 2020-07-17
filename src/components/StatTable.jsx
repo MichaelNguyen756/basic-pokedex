@@ -2,17 +2,17 @@ import React from 'react';
 
 import Table from 'react-bootstrap/Table';
 
-function StatTable({ statList }) {
+function StatSection({ statList }) {
     return (
-        <section className="poke-section">
-            <h2 className="title">Stats</h2>
-            <div className="stat">
+        <section>
+            <h2>Stats</h2>
+            <div>
                 <Table bordered>
                     <tbody>
-                        {statList.map((statObj, index) => (
+                        {statList.map(({ stat, base_stat }, index) => (
                             <tr key={index}>
-                                <th>{statObj.stat.name}: </th>
-                                <td>{statObj.base_stat}</td>
+                                <th>{stat.name}: </th>
+                                <td>{base_stat}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -22,4 +22,4 @@ function StatTable({ statList }) {
     );
 }
 
-export default StatTable;
+export default StatSection;

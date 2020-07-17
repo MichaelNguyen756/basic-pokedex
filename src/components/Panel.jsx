@@ -1,58 +1,41 @@
 import React from 'react';
 import _ from 'lodash';
-import styled from 'styled-components';
-import Table from 'react-bootstrap/Table';
 
-import StatTable from './StatTable';
-import MoveList from './MoveList';
-import InfoRow from './InfoRow';
+import StyledPanel from './styled/Panel';
+import StatSection from './StatTable';
+import MoveSection from './MoveSection';
 import NameSection from './NameSection';
+import Sprite from './Sprite';
+import AttributeTable from './AttributeTable';
 
-const StyledPanel = styled.section`
-    display: flex;
-    flex-flow: column nowrap;
-`;
+function getMoveList(moves) {
+    return moves.filter(({ version_group_details }) =>
+        _.includes(
+            version_group_details.map(
+                ({ move_learn_method }) => move_learn_method.name,
+            ),
+            'level-up',
+        ),
+    );
+}
 
-function Panel({ info: { abilities, types, sprites, stats, moves }, name }) {
+function Panel({
+    info: {
+        abilities,
+        types,
+        sprites: { front_default },
+        stats,
+        moves,
+    },
+    name,
+}) {
     return (
         <StyledPanel>
             <NameSection name={name} />
-            <div className="image">
-                <svg width="105px" height="105px">
-                    <image
-                        href={sprites.front_default}
-                        width="100%"
-                        height="100%"
-                    ></image>
-                </svg>
-            </div>
-            <div className="poke-section">
-                <Table bordered>
-                    <tbody>
-                        <InfoRow
-                            rowTitle="Type"
-                            infoList={types}
-                            listType="type"
-                        />
-                        <InfoRow
-                            rowTitle="Abilities"
-                            infoList={abilities}
-                            listType="ability"
-                        />
-                    </tbody>
-                </Table>
-            </div>
-            <StatTable statList={stats} />
-            <MoveList
-                moveList={moves.filter(moveObj =>
-                    _.includes(
-                        moveObj.version_group_details.map(
-                            o => o.move_learn_method.name,
-                        ),
-                        'level-up',
-                    ),
-                )}
-            />
+            <Sprite spriteImg={front_default} />
+            <AttributeTable types={types} abilities={abilities} />
+            <StatSection statList={stats} />
+            <MoveSection moveList={getMoveList(moves)} />
         </StyledPanel>
     );
 }
