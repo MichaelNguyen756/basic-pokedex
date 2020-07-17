@@ -7,6 +7,8 @@ const NamedSection = styled.div`
     font-weight: bold;
     color: #ffffff;
     background-color: brown;
+    position: sticky;
+    top: 0;
 `;
 
 export default NamedSection;

@@ -1,11 +1,12 @@
 import React from 'react';
-
 import Table from 'react-bootstrap/Table';
+
+import Title from './Title';
 
 function StatSection({ statList }) {
     return (
         <section>
-            <h2>Stats</h2>
+            <Title>Stats</Title>
             <div>
                 <Table bordered>
                     <tbody>

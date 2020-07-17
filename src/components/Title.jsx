@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Title() {
-    return <h2>Moves</h2>;
+function Title({ children }) {
+    return <h2>{children}</h2>;
 }
 
 export default Title;

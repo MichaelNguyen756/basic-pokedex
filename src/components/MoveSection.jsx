@@ -6,7 +6,7 @@ import MoveTable from './MoveTable';
 function MoveSection({ moveList }) {
     return (
         <section>
-            <Title />
+            <Title>Moves</Title>
             <MoveTable moveList={moveList} />
         </section>
     );

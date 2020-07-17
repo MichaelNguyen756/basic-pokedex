@@ -3,24 +3,12 @@ import Table from 'react-bootstrap/Table';
 import _ from 'lodash';
 
 import MoveRow from './MoveRow';
-import { filterByVersionGroup } from '../helpers/filters';
 
-function getMoveList(moveList) {
-    return moveList
-        .filter(
-            ({ version_group_details }) =>
-                version_group_details.find(filterByVersionGroup) !== undefined,
-        )
-        .map(({ version_group_details, move }) => ({
-            levelAt: version_group_details.find(filterByVersionGroup)
-                .level_learned_at,
-            moveName: move.name,
-        }));
-}
+import { filterMoveList } from '../helpers/api';
 
 function renderMoveRows(moveList) {
     return _.orderBy(
-        getMoveList(moveList),
+        filterMoveList(moveList),
         ['levelAt'],
         ['asc'],
     ).map(({ levelAt, moveName }, index) => (
