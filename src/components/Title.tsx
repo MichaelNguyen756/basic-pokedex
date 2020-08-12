@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-function Title({ children }) {
+function Title({ children }: { children: ReactNode }) {
     return <h2>{children}</h2>;
 }
 
