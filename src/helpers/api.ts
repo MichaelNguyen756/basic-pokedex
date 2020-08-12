@@ -2,15 +2,14 @@ import _ from 'lodash';
 
 import { filterByVersionGroup } from './filters';
 
-const PokemonAPIURL = 'https://pokeapi.co/api/v2';
+const PokemonAPIURL: string = 'https://pokeapi.co/api/v2';
 
-export function getURL() {
+export function getURL(): string {
     return `${PokemonAPIURL}/pokemon?limit=151`;
 }
 
-export async function GetPokemonJSONFromAPI(url) {
-    const parsedUrl = url || getURL();
-    const response = await fetch(parsedUrl);
+export async function GetPokemonJSONFromAPI(url: string = getURL()) {
+    const response: Response = await fetch(url);
     return response.json();
 }
 
