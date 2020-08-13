@@ -1,10 +1,18 @@
 import React from 'react';
 
-function getNames(objectList, objectType) {
-    return objectList.map(obj => obj[objectType].name).join(', ');
+function getNames(objectList: any, objectType: any) {
+    return objectList.map((obj: any) => obj[objectType].name).join(', ');
 }
 
-function InfoRow({ rowTitle, infoList, listType }) {
+function InfoRow({
+    rowTitle,
+    infoList,
+    listType,
+}: {
+    rowTitle: string;
+    infoList: any;
+    listType: any;
+}) {
     return (
         <tr>
             <th>{rowTitle}:</th>

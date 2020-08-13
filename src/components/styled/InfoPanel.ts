@@ -8,7 +8,7 @@ const InfoPanel = styled.section`
     height: 100%;
     overflow-y: scroll;
 
-    ${({ hasSelection }) =>
+    ${({ hasSelection }: { hasSelection: boolean }) =>
         !hasSelection &&
         css`
             overflow-y: hidden;

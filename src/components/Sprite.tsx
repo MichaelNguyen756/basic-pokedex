@@ -2,9 +2,9 @@ import React from 'react';
 
 import SpriteImage from './styled/SpriteImage';
 
-const imageDimension = '105px';
+const imageDimension: string = '105px';
 
-function Sprite({ spriteImg }) {
+function Sprite({ spriteImg }: { spriteImg: string }) {
     return (
         <div>
             <svg width={imageDimension} height={imageDimension}>

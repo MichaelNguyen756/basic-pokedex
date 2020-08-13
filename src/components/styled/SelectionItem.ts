@@ -9,7 +9,7 @@ const SelectionItem = styled.li`
     list-style: none;
     padding: 5px 10px;
 
-    ${({ isSelected }) =>
+    ${({ isSelected }: { isSelected: boolean }) =>
         isSelected &&
         css`
             background-color: coral;

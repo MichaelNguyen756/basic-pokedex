@@ -6,7 +6,7 @@ import MoveRow from './MoveRow';
 
 import { filterMoveList } from '../helpers/api';
 
-function renderMoveRows(moveList) {
+function renderMoveRows(moveList: any) {
     return _.orderBy(
         filterMoveList(moveList),
         ['levelAt'],
@@ -16,7 +16,7 @@ function renderMoveRows(moveList) {
     ));
 }
 
-function MoveTable({ moveList }) {
+function MoveTable({ moveList }: { moveList: any }) {
     return (
         <div>
             <Table bordered>

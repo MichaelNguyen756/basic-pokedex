@@ -9,7 +9,13 @@ import AttributeTable from './AttributeTable';
 
 import { getMoveList } from '../helpers/api';
 
-function Panel({ info: { abilities, types, sprites, stats, moves }, name }) {
+function Panel({
+    info: { abilities, types, sprites, stats, moves },
+    name,
+}: {
+    info: { abilities: any; types: any; sprites: any; stats: any; moves: any };
+    name: any;
+}) {
     return (
         <StyledPanel>
             <NameSection name={name} />

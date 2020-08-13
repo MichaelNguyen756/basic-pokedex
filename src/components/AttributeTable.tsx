@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 
 import InfoRow from './InfoRow';
 
-function AttributeTable({ types, abilities }) {
+function AttributeTable({ types, abilities }: { types: any; abilities: any }) {
     return (
         <section>
             <Table bordered>
