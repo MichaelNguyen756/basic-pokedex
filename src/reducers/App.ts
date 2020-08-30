@@ -1,6 +1,13 @@
 import { Action, ActionType } from '../types/reducer';
+import { PokemonNamedAPIResource } from '../types/api';
 
-export const initialState = {
+export interface PokedexState {
+    PokemonList: PokemonNamedAPIResource[];
+    SelectedPokemonIndex: number | null;
+    SelectedPokemonInfo: any;
+}
+
+export const initialState: PokedexState = {
     PokemonList: [],
     SelectedPokemonIndex: null,
     SelectedPokemonInfo: {},

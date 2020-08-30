@@ -9,12 +9,7 @@ import { GetPokemonJSONFromAPI } from './helpers/api';
 
 import StyledApp from './StyledApp';
 
-import {
-    initialState,
-    UPDATE_INFO,
-    UPDATE_LIST,
-    Reducer,
-} from './reducers/App';
+import { initialState, UPDATE_INFO, UPDATE_LIST, Reducer } from './reducers/App';
 
 function App() {
     const [state, dispatch] = useReducer(Reducer, initialState);
@@ -51,20 +46,15 @@ function App() {
     return (
         <StyledApp>
             <SelectionMenuSection>
-                {PokemonList.map(
-                    (
-                        { url, name }: { url: string; name: string },
-                        index: number,
-                    ) => (
-                        <SelectionItem
-                            isSelected={SelectedPokemonIndex === index}
-                            key={index}
-                            onClickHandler={() => getPokemonInfo(url, index)}
-                        >
-                            {name}
-                        </SelectionItem>
-                    ),
-                )}
+                {PokemonList.map(({ url, name }: { url: string; name: string }, index: number) => (
+                    <SelectionItem
+                        isSelected={SelectedPokemonIndex === index}
+                        key={index}
+                        onClickHandler={() => getPokemonInfo(url, index)}
+                    >
+                        {name}
+                    </SelectionItem>
+                ))}
             </SelectionMenuSection>
             <InfoPanel hasSelection={hasSelection}>
                 {hasSelection && (

@@ -5,7 +5,7 @@ import StyledEmptySelectionSection from './styled/EmptySelectionSection';
 function EmptySelectionSection() {
     return (
         <StyledEmptySelectionSection>
-            <h1>Select a Pokemon from the left-hand list</h1>
+            <h1>Select a Pokemon from the left-hand list blah</h1>
         </StyledEmptySelectionSection>
     );
 }
