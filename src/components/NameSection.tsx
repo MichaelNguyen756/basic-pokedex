@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import _ from 'lodash';
 
 import StyledNameSection from './styled/NameSection';
 
-function NameSection({ name }: { name: string }) {
+interface NameSectionProps {
+    name: string;
+}
+
+function NameSection({ name }: NameSectionProps): ReactElement {
     return <StyledNameSection>{_.upperFirst(name)}</StyledNameSection>;
 }
 

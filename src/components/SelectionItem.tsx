@@ -1,16 +1,14 @@
-import React, { ReactNode, MouseEventHandler } from 'react';
+import React, { ReactNode, MouseEventHandler, ReactElement } from 'react';
 
 import StyledSelectionItem from './styled/SelectionItem';
 
-function SelectionItem({
-    children,
-    onClickHandler,
-    isSelected,
-}: {
+interface SelectionItemProps {
     children: ReactNode;
     onClickHandler: MouseEventHandler;
     isSelected: boolean;
-}) {
+}
+
+function SelectionItem({ children, onClickHandler, isSelected }: SelectionItemProps): ReactElement {
     return (
         <StyledSelectionItem isSelected={isSelected} onClick={onClickHandler}>
             {children}

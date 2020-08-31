@@ -1,19 +1,14 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 
 import StyledInfoPanel from './styled/InfoPanel';
 
-function InfoPanel({
-    hasSelection,
-    children,
-}: {
+interface InfoPanelProps {
     hasSelection: boolean;
     children: ReactNode;
-}) {
-    return (
-        <StyledInfoPanel hasSelection={hasSelection}>
-            {children}
-        </StyledInfoPanel>
-    );
+}
+
+function InfoPanel({ hasSelection, children }: InfoPanelProps): ReactElement {
+    return <StyledInfoPanel hasSelection={hasSelection}>{children}</StyledInfoPanel>;
 }
 
 export default InfoPanel;

@@ -1,18 +1,16 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { borderSetting } from './commonValues';
 
-const InfoPanel = styled.section`
-    flex: 1 1 0;
-    border: ${borderSetting};
-    height: 100%;
-    overflow-y: scroll;
+interface InfoPanelProps {
+    hasSelection: boolean;
+}
 
-    ${({ hasSelection }: { hasSelection: boolean }) =>
-        !hasSelection &&
-        css`
-            overflow-y: hidden;
-        `}
+const InfoPanel = styled.section<InfoPanelProps>`
+    flex: 1 1 0;
+    height: 100%;
+    border: ${borderSetting};
+    overflow-y: ${({ hasSelection }) => (hasSelection ? 'scroll' : 'hidden')};
 `;
 
 export default InfoPanel;

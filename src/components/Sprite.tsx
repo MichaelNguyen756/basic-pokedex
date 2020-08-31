@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import SpriteImage from './styled/SpriteImage';
 
 const imageDimension: string = '105px';
 
-function Sprite({ spriteImg }: { spriteImg: string }) {
+interface SpriteProps {
+    spriteImg: string;
+}
+
+function Sprite({ spriteImg }: SpriteProps): ReactElement {
     return (
         <div>
             <svg width={imageDimension} height={imageDimension}>

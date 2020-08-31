@@ -1,8 +1,12 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 
 import StyledSelectionMenu from './styled/SelectionMenu';
 
-function SelectionMenu({ children }: { children: ReactNode }) {
+interface SelectionMenuProps {
+    children: ReactNode;
+}
+
+function SelectionMenu({ children }: SelectionMenuProps): ReactElement {
     return <StyledSelectionMenu>{children}</StyledSelectionMenu>;
 }
 

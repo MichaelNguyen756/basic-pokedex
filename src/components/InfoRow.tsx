@@ -1,22 +1,15 @@
-import React from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 
-function getNames(objectList: any, objectType: any) {
-    return objectList.map((obj: any) => obj[objectType].name).join(', ');
+interface InfoRowProps {
+    rowTitle: string;
+    children: ReactNode;
 }
 
-function InfoRow({
-    rowTitle,
-    infoList,
-    listType,
-}: {
-    rowTitle: string;
-    infoList: any;
-    listType: any;
-}) {
+function InfoRow({ rowTitle, children }: InfoRowProps): ReactElement {
     return (
         <tr>
             <th>{rowTitle}:</th>
-            <td>{getNames(infoList, listType)}</td>
+            <td>{children}</td>
         </tr>
     );
 }

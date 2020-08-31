@@ -1,6 +1,10 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 
-function Title({ children }: { children: ReactNode }) {
+interface TitleProps {
+    children: ReactNode;
+}
+
+function Title({ children }: TitleProps): ReactElement {
     return <h2>{children}</h2>;
 }
 

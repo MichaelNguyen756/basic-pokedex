@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import StyledPanel from './styled/Panel';
 import StatSection from './StatTable';
@@ -8,14 +8,17 @@ import Sprite from './Sprite';
 import AttributeTable from './AttributeTable';
 
 import { getMoveList } from '../helpers/api';
+import { IPokemon } from '../types/api';
+
+interface PanelProps {
+    info: IPokemon;
+    name: string;
+}
 
 function Panel({
     info: { abilities, types, sprites, stats, moves },
     name,
-}: {
-    info: { abilities: any; types: any; sprites: any; stats: any; moves: any };
-    name: any;
-}) {
+}: PanelProps): ReactElement {
     return (
         <StyledPanel>
             <NameSection name={name} />

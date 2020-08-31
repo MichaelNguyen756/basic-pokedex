@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, Dispatch, ReactElement } from 'react';
 
 import Panel from './components/Panel';
 import SelectionMenuSection from './components/SelectionMenuSection';
@@ -9,31 +9,33 @@ import { GetPokemonJSONFromAPI } from './helpers/api';
 
 import StyledApp from './StyledApp';
 
-import { initialState, UPDATE_INFO, UPDATE_LIST, Reducer } from './reducers/App';
+import { initialState, Reducer } from './reducers/App';
+import { updateInfo, updateList } from './reducers/actions';
+import { PokedexState, UpdateAPIActionTypes } from './reducers/types';
 
-function App() {
-    const [state, dispatch] = useReducer(Reducer, initialState);
+function App(): ReactElement {
+    const [state, dispatch]: [PokedexState, Dispatch<UpdateAPIActionTypes>] = useReducer(
+        Reducer,
+        initialState,
+    );
 
-    async function getPokemonInfo(url: string, index: number) {
+    const getPokemonInfo = async (url: string, index: number): Promise<void> => {
         try {
             const resultObj = await GetPokemonJSONFromAPI(url);
-            dispatch({
-                type: UPDATE_INFO,
-                payload: { index, info: resultObj },
-            });
+            dispatch(updateInfo(index, resultObj));
         } catch {
             console.error('Error fetching Pokemon Info');
         }
-    }
+    };
 
-    async function getInitialList() {
+    const getInitialList = async (): Promise<void> => {
         try {
             const { results } = await GetPokemonJSONFromAPI();
-            dispatch({ type: UPDATE_LIST, payload: results });
+            dispatch(updateList(results));
         } catch {
             console.error('Error fetching Pokemon API Resource');
         }
-    }
+    };
 
     // Once rendered for the first time, then load the initial list once
     useEffect(() => {
@@ -41,7 +43,7 @@ function App() {
     }, []);
 
     const { PokemonList, SelectedPokemonIndex, SelectedPokemonInfo } = state;
-    const hasSelection = SelectedPokemonIndex != null && PokemonList.length > 0;
+    const hasSelection: boolean = SelectedPokemonIndex != null && PokemonList.length > 0;
 
     return (
         <StyledApp>
@@ -57,13 +59,13 @@ function App() {
                 ))}
             </SelectionMenuSection>
             <InfoPanel hasSelection={hasSelection}>
+                {!hasSelection && <EmptySelectionSection />}
                 {hasSelection && (
                     <Panel
-                        name={PokemonList[SelectedPokemonIndex].name}
-                        info={SelectedPokemonInfo}
+                        name={PokemonList[SelectedPokemonIndex!].name}
+                        info={SelectedPokemonInfo!}
                     />
                 )}
-                {!hasSelection && <EmptySelectionSection />}
             </InfoPanel>
         </StyledApp>
     );

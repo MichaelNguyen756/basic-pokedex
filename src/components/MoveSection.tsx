@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import Title from './Title';
 import MoveTable from './MoveTable';
 
-function MoveSection({ moveList }: { moveList: any }) {
+import { IPokemonMove } from '../types/api';
+
+interface MoveSectionProps {
+    moveList: IPokemonMove[];
+}
+
+function MoveSection({ moveList }: MoveSectionProps): ReactElement {
     return (
         <section>
             <Title>Moves</Title>

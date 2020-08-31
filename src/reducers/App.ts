@@ -1,31 +1,22 @@
-import { Action, ActionType } from '../types/reducer';
-import { PokemonNamedAPIResource } from '../types/api';
-
-export interface PokedexState {
-    PokemonList: PokemonNamedAPIResource[];
-    SelectedPokemonIndex: number | null;
-    SelectedPokemonInfo: any;
-}
+import { PokedexState, UPDATE_INFO, UPDATE_LIST, UpdateAPIActionTypes } from './types';
 
 export const initialState: PokedexState = {
     PokemonList: [],
     SelectedPokemonIndex: null,
-    SelectedPokemonInfo: {},
+    SelectedPokemonInfo: null,
 };
 
-export const UPDATE_LIST = 'UPDATE_LIST';
-export const UPDATE_INFO = 'UPDATE_INFO';
-
-export function Reducer(state = initialState, action: Action) {
-    //  Doing destructuring here to be explicit in the parameters about state and action
-    const { type, payload }: { type: ActionType; payload: any } = action;
-    switch (type) {
+export function Reducer(
+    state: PokedexState = initialState,
+    action: UpdateAPIActionTypes,
+): PokedexState {
+    switch (action.type) {
         case UPDATE_LIST:
-            return Object.assign({}, state, { PokemonList: payload });
+            return Object.assign({}, state, { PokemonList: action.payload });
         case UPDATE_INFO:
             return Object.assign({}, state, {
-                SelectedPokemonIndex: payload.index,
-                SelectedPokemonInfo: payload.info,
+                SelectedPokemonIndex: action.payload.index,
+                SelectedPokemonInfo: action.payload.info,
             });
         default:
             return state;

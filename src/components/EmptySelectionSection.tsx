@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import StyledEmptySelectionSection from './styled/EmptySelectionSection';
 
-function EmptySelectionSection() {
+function EmptySelectionSection(): ReactElement {
     return (
         <StyledEmptySelectionSection>
-            <h1>Select a Pokemon from the left-hand list blah</h1>
+            <h1>Select a Pokemon from the left-hand list</h1>
         </StyledEmptySelectionSection>
     );
 }

@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-function MoveRow({ levelAt, moveName }: { levelAt: any; moveName: any }) {
+import { IMoveAttribute } from '../types/api';
+
+type MoveRowProps = IMoveAttribute;
+
+function MoveRow({ levelAt, moveName }: MoveRowProps): ReactElement {
     return (
         <tr>
             <td>{levelAt}</td>
