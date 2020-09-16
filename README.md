@@ -14,7 +14,7 @@ Installs all of the relevant packages needed to build the application.
 
 Runs the app in the development mode.<br> Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### 'yarn storybook'
+### `yarn storybook`
 
 Runs the React Storybook app.<br> Open [http://localhost:6006](http://localhost:6006/) to view it in the browser.
 
