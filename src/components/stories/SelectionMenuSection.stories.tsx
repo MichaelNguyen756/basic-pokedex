@@ -36,7 +36,7 @@ Default.args = {
             url: `${PokemonAPIURL}/growlithe`,
         },
     ],
-    selectedIndex: 0,
+    selectedIndex: null,
 };
 
 export const WithSpecialPokemon = Template.bind({});
