@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { borderSetting } from './commonValues';
 
@@ -6,20 +6,21 @@ interface SelectionItemProps {
     isSelected: boolean;
 }
 
-const SelectionItem = styled.li<SelectionItemProps>`
-    border-right: ${borderSetting};
-    border-bottom: ${borderSetting};
-    border-left: ${borderSetting};
-    list-style: none;
+const SelectionItem = styled.button<SelectionItemProps>`
+    border-style: solid;
     padding: 5px 10px;
+    background-color: ${({ isSelected }) => (isSelected ? 'coral' : 'transparent')};
 
-    ${({ isSelected }) =>
-        isSelected &&
-        css`
-            background-color: coral;
-        `}
+    /**
+        This is for testing in isolation
+     */
+    &::not(:only-child) {
+        border-right: ${borderSetting};
+        border-bottom: ${borderSetting};
+        border-left: ${borderSetting};
+    }
 
-    &:last-child {
+    &:last-child::not(:only-child) {
         border-bottom: 0;
     }
 

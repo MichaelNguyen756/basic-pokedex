@@ -1,14 +1,15 @@
 import React, { ReactElement } from 'react';
+import { formatText } from '../helpers/stringFormat';
 
-import { IMoveAttribute } from '../types/api';
+import { MoveAttribute } from '../types/api';
 
-type MoveRowProps = IMoveAttribute;
+type MoveRowProps = MoveAttribute;
 
 function MoveRow({ levelAt, moveName }: MoveRowProps): ReactElement {
     return (
         <tr>
             <td>{levelAt}</td>
-            <td>{moveName}</td>
+            <td>{formatText(moveName)}</td>
         </tr>
     );
 }

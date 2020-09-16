@@ -8,10 +8,10 @@ import Sprite from './Sprite';
 import AttributeTable from './AttributeTable';
 
 import { getMoveList } from '../helpers/api';
-import { IPokemon } from '../types/api';
+import { Pokemon } from '../types/api';
 
 interface PanelProps {
-    info: IPokemon;
+    info: Pokemon;
     name: string;
 }
 

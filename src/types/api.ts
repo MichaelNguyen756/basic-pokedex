@@ -1,17 +1,17 @@
 // This is to match the Pokemon API documentation
-export interface INamedAPIResource {
+export interface NamedAPIResource {
     name: string;
     url: string;
 }
 
-export interface INamedAPIResourceList {
+export interface NamedAPIResourceList {
     count: number;
     next: string;
     previous: boolean;
-    results: INamedAPIResource[];
+    results: NamedAPIResource[];
 }
 
-export interface IPokemonSprites {
+export interface PokemonSprites {
     back_default: string;
     back_female: string;
     back_shiny: string;
@@ -22,83 +22,83 @@ export interface IPokemonSprites {
     front_shiny_female: string;
 }
 
-export interface IVersionGameIndex {
+export interface VersionGameIndex {
     game_index: number;
     version: VersionAPIResource;
 }
 
-export interface IPokemonHeldItemVersion {
+export interface PokemonHeldItemVersion {
     rarity: number;
     version: VersionAPIResource;
 }
 
-export interface IPokemonHeldItem {
+export interface PokemonHeldItem {
     item: ItemAPIResource;
-    version_details: IPokemonHeldItemVersion;
+    version_details: PokemonHeldItemVersion;
 }
 
-export interface IPokemonMoveVersion {
+export interface PokemonMoveVersion {
     level_learned_at: number;
     move_learn_method: MoveLearnMethodAPIResource;
     version_group: VersionGroupAPIResource;
 }
 
-export interface IPokemonMove {
+export interface PokemonMove {
     move: PokemonMoveAPIResource;
-    version_group_details: IPokemonMoveVersion[];
+    version_group_details: PokemonMoveVersion[];
 }
 
-export interface IPokemonStat {
+export interface PokemonStat {
     effort: number;
     base_stat: number;
     stat: PokemonStatAPIResource;
 }
 
-export interface IPokemonType {
+export interface PokemonType {
     slot: number;
     type: TypeAPIResource;
 }
 
-export interface IPokemonAbility {
+export interface PokemonAbility {
     ability: AbilityAPIResource;
     is_hidden: boolean;
     slot: number;
 }
 
-export interface IPokemon {
-    abilities: IPokemonAbility[];
+export interface Pokemon {
+    abilities: PokemonAbility[];
     base_experience: number;
     forms: PokemonFormAPIResource[];
-    game_indices: IVersionGameIndex[];
+    game_indices: VersionGameIndex[];
     height: number;
-    held_items: IPokemonHeldItem[];
+    held_items: PokemonHeldItem[];
     id: number;
     is_default: boolean;
     location_area_encounters: string;
-    moves: IPokemonMove[];
+    moves: PokemonMove[];
     name: string;
     order: number;
     species: PokemonSpeciesAPIResource;
-    sprites: IPokemonSprites;
-    stats: IPokemonStat[];
-    types: IPokemonType[];
+    sprites: PokemonSprites;
+    stats: PokemonStat[];
+    types: PokemonType[];
     weight: number;
 }
 
-export interface IMoveAttribute {
+export interface MoveAttribute {
     levelAt: number | undefined;
     moveName: string;
 }
 
-export type AbilityAPIResource = INamedAPIResource;
-export type PokemonAPIResource = INamedAPIResource;
-export type MoveLearnMethodAPIResource = INamedAPIResource;
-export type PokemonFormAPIResource = INamedAPIResource;
-export type PokemonMoveAPIResource = INamedAPIResource;
-export type PokemonSpeciesAPIResource = INamedAPIResource;
-export type PokemonStatAPIResource = INamedAPIResource;
-export type TypeAPIResource = INamedAPIResource;
-export type VersionAPIResource = INamedAPIResource;
-export type VersionGroupAPIResource = INamedAPIResource;
-export type ItemAPIResource = INamedAPIResource;
-export type PokemonAPIResourceList = INamedAPIResourceList;
+export type AbilityAPIResource = NamedAPIResource;
+export type PokemonAPIResource = NamedAPIResource;
+export type MoveLearnMethodAPIResource = NamedAPIResource;
+export type PokemonFormAPIResource = NamedAPIResource;
+export type PokemonMoveAPIResource = NamedAPIResource;
+export type PokemonSpeciesAPIResource = NamedAPIResource;
+export type PokemonStatAPIResource = NamedAPIResource;
+export type TypeAPIResource = NamedAPIResource;
+export type VersionAPIResource = NamedAPIResource;
+export type VersionGroupAPIResource = NamedAPIResource;
+export type ItemAPIResource = NamedAPIResource;
+export type PokemonAPIResourceList = NamedAPIResourceList;

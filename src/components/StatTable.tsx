@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react';
-import Table from 'react-bootstrap/Table';
 
+import StyledTable from './styled/Table';
 import Title from './Title';
 
-import { IPokemonStat } from '../types/api';
+import { PokemonStat } from '../types/api';
+import { formatText } from '../helpers/stringFormat';
 
 interface StatSectionProps {
-    statList: IPokemonStat[];
+    statList: PokemonStat[];
 }
 
 function StatSection({ statList }: StatSectionProps): ReactElement {
@@ -14,16 +15,16 @@ function StatSection({ statList }: StatSectionProps): ReactElement {
         <section>
             <Title>Stats</Title>
             <div>
-                <Table bordered>
+                <StyledTable bordered>
                     <tbody>
-                        {statList.map(({ stat, base_stat }: IPokemonStat, index: number) => (
+                        {statList.map(({ stat, base_stat }: PokemonStat, index: number) => (
                             <tr key={index}>
-                                <th>{stat.name}: </th>
+                                <th>{formatText(stat.name)}: </th>
                                 <td>{base_stat}</td>
                             </tr>
                         ))}
                     </tbody>
-                </Table>
+                </StyledTable>
             </div>
         </section>
     );

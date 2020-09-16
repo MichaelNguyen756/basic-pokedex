@@ -3,14 +3,15 @@ import _ from 'lodash';
 import { filterByVersionGroup } from './filters';
 import {
     PokemonAPIResourceList,
-    IPokemonType,
-    IPokemonAbility,
-    IPokemonMove,
-    IPokemonMoveVersion,
-    IMoveAttribute,
+    PokemonType,
+    PokemonAbility,
+    PokemonMove,
+    PokemonMoveVersion,
+    MoveAttribute,
 } from '../types/api';
+import { formatText } from './stringFormat';
 
-const PokemonAPIURL: string = 'https://pokeapi.co/api/v2';
+export const PokemonAPIURL: string = 'https://pokeapi.co/api/v2';
 
 export function getURL(): string {
     return `${PokemonAPIURL}/pokemon?limit=151`;
@@ -23,33 +24,33 @@ export async function GetPokemonJSONFromAPI(
     return response.json();
 }
 
-export function getMoveList(moves: IPokemonMove[]): IPokemonMove[] {
-    return moves.filter(({ version_group_details }: IPokemonMove) =>
+export function getMoveList(moves: PokemonMove[]): PokemonMove[] {
+    return moves.filter(({ version_group_details }: PokemonMove) =>
         _.includes(
             version_group_details.map(
-                ({ move_learn_method: { name } }: IPokemonMoveVersion) => name,
+                ({ move_learn_method: { name } }: PokemonMoveVersion) => name,
             ),
             'level-up',
         ),
     );
 }
 
-export function filterMoveList(moveList: IPokemonMove[]): IMoveAttribute[] {
+export function filterMoveList(moveList: PokemonMove[]): MoveAttribute[] {
     return moveList
         .filter(
-            ({ version_group_details }: IPokemonMove) =>
+            ({ version_group_details }: PokemonMove) =>
                 version_group_details.find(filterByVersionGroup) !== undefined,
         )
-        .map(({ version_group_details, move }: IPokemonMove) => ({
+        .map(({ version_group_details, move }: PokemonMove) => ({
             levelAt: version_group_details.find(filterByVersionGroup)?.level_learned_at,
             moveName: move.name,
         }));
 }
 
-export function getTypes(list: IPokemonType[]): string {
-    return list.map(({ type }) => type.name).join(', ');
+export function getTypes(list: PokemonType[]): string {
+    return list.map(({ type }) => formatText(type.name)).join(', ');
 }
 
-export function getAbilities(list: IPokemonAbility[]): string {
-    return list.map(({ ability }) => ability.name).join(', ');
+export function getAbilities(list: PokemonAbility[]): string {
+    return list.map(({ ability }) => formatText(ability.name)).join(', ');
 }

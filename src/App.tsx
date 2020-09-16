@@ -2,13 +2,12 @@ import React, { useReducer, useEffect, Dispatch, ReactElement } from 'react';
 
 import Panel from './components/Panel';
 import SelectionMenuSection from './components/SelectionMenuSection';
-import SelectionItem from './components/SelectionItem';
 import InfoPanel from './components/InfoPanel';
 import EmptySelectionSection from './components/EmptySelectionSection';
-import { GetPokemonJSONFromAPI } from './helpers/api';
 
 import StyledApp from './StyledApp';
 
+import { GetPokemonJSONFromAPI } from './helpers/api';
 import { initialState, Reducer } from './reducers/App';
 import { updateInfo, updateList } from './reducers/actions';
 import { PokedexState, UpdateAPIActionTypes } from './reducers/types';
@@ -23,8 +22,8 @@ function App(): ReactElement {
         try {
             const resultObj = await GetPokemonJSONFromAPI(url);
             dispatch(updateInfo(index, resultObj));
-        } catch {
-            console.error('Error fetching Pokemon Info');
+        } catch (error) {
+            console.error(`Error fetching Pokemon Info. Error: ${error}`);
         }
     };
 
@@ -32,8 +31,8 @@ function App(): ReactElement {
         try {
             const { results } = await GetPokemonJSONFromAPI();
             dispatch(updateList(results));
-        } catch {
-            console.error('Error fetching Pokemon API Resource');
+        } catch (error) {
+            console.error(`Error fetching Pokemon API Resource. Error: ${error}`);
         }
     };
 
@@ -47,17 +46,11 @@ function App(): ReactElement {
 
     return (
         <StyledApp>
-            <SelectionMenuSection>
-                {PokemonList.map(({ url, name }: { url: string; name: string }, index: number) => (
-                    <SelectionItem
-                        isSelected={SelectedPokemonIndex === index}
-                        key={index}
-                        onClickHandler={() => getPokemonInfo(url, index)}
-                    >
-                        {name}
-                    </SelectionItem>
-                ))}
-            </SelectionMenuSection>
+            <SelectionMenuSection
+                menuItemList={PokemonList}
+                selectedIndex={SelectedPokemonIndex}
+                onClickHandler={getPokemonInfo}
+            />
             <InfoPanel hasSelection={hasSelection}>
                 {!hasSelection && <EmptySelectionSection />}
                 {hasSelection && (

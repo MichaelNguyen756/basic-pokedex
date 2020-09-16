@@ -3,10 +3,10 @@ import React, { ReactElement } from 'react';
 import Title from './Title';
 import MoveTable from './MoveTable';
 
-import { IPokemonMove } from '../types/api';
+import { PokemonMove } from '../types/api';
 
 interface MoveSectionProps {
-    moveList: IPokemonMove[];
+    moveList: PokemonMove[];
 }
 
 function MoveSection({ moveList }: MoveSectionProps): ReactElement {

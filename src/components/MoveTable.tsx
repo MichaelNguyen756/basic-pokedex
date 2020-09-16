@@ -1,22 +1,22 @@
 import React, { ReactElement } from 'react';
-import Table from 'react-bootstrap/Table';
 import _ from 'lodash';
 
+import StyledTable from './styled/Table';
 import MoveRow from './MoveRow';
 
 import { filterMoveList } from '../helpers/api';
-import { IPokemonMove, IMoveAttribute } from '../types/api';
+import { PokemonMove, MoveAttribute } from '../types/api';
 
 interface MoveTableProps {
-    moveList: IPokemonMove[];
+    moveList: PokemonMove[];
 }
 
-function renderMoveRows(moveList: IPokemonMove[]): ReactElement[] {
+function renderMoveRows(moveList: PokemonMove[]): ReactElement[] {
     return _.orderBy(
         filterMoveList(moveList),
         ['levelAt'],
         ['asc'],
-    ).map(({ levelAt, moveName }: IMoveAttribute, index: number) => (
+    ).map(({ levelAt, moveName }: MoveAttribute, index: number) => (
         <MoveRow key={index} levelAt={levelAt} moveName={moveName} />
     ));
 }
@@ -24,7 +24,7 @@ function renderMoveRows(moveList: IPokemonMove[]): ReactElement[] {
 function MoveTable({ moveList }: MoveTableProps): ReactElement {
     return (
         <div>
-            <Table bordered>
+            <StyledTable bordered>
                 <thead>
                     <tr>
                         <th>Learns At</th>
@@ -32,7 +32,7 @@ function MoveTable({ moveList }: MoveTableProps): ReactElement {
                     </tr>
                 </thead>
                 <tbody>{renderMoveRows(moveList)}</tbody>
-            </Table>
+            </StyledTable>
         </div>
     );
 }

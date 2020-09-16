@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import _ from 'lodash';
+import PokemonName from './PokemonName';
 
 import StyledNameSection from './styled/NameSection';
 
@@ -8,7 +8,11 @@ interface NameSectionProps {
 }
 
 function NameSection({ name }: NameSectionProps): ReactElement {
-    return <StyledNameSection>{_.upperFirst(name)}</StyledNameSection>;
+    return (
+        <StyledNameSection>
+            <PokemonName name={name} />
+        </StyledNameSection>
+    );
 }
 
 export default NameSection;
