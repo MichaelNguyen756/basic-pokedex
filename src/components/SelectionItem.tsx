@@ -16,7 +16,7 @@ function SelectionItem({
     children,
 }: SelectionItemProps): ReactElement {
     return (
-        <StyledSelectionItem isSelected={isSelected} onClick={onClickHandler}>
+        <StyledSelectionItem isSelected={isSelected} onClick={onClickHandler} role="button">
             {buttonText}
             {children}
         </StyledSelectionItem>

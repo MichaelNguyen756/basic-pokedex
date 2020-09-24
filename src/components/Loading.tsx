@@ -4,10 +4,14 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import StyledLoading from './styled/Loading';
 
-function Loading(): ReactElement {
+interface LoadingProps {
+    title: string;
+}
+
+function Loading({ title = 'loading' }: LoadingProps): ReactElement {
     return (
         <StyledLoading>
-            <FontAwesomeIcon icon={faSpinner} spin />
+            <FontAwesomeIcon icon={faSpinner} spin title={title} />
         </StyledLoading>
     );
 }

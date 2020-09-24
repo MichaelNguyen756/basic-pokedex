@@ -29,7 +29,7 @@ function SelectionMenuSection({
                         <PokemonName name={name} />
                     </SelectionItem>
                 ))}
-            {menuItemList.length === 0 && <Loading />}
+            {menuItemList.length === 0 && <Loading title="loading menu" />}
         </StyledMenuSection>
     );
 }

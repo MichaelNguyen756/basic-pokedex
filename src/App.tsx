@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, Dispatch, ReactElement } from 'react';
+import React, { useReducer, useEffect, Dispatch, ReactElement, useRef } from 'react';
 
 import Panel from './components/Panel';
 import SelectionMenuSection from './components/SelectionMenuSection';
@@ -11,6 +11,7 @@ import { GetPokemonJSONFromAPI } from './helpers/api';
 import { initialState, Reducer } from './reducers/App';
 import { updateInfo, updateList } from './reducers/actions';
 import { PokedexState, UpdateAPIActionTypes } from './reducers/types';
+import useIsMountedRef from './hooks/useIsMountedRef';
 
 function App(): ReactElement {
     const [state, dispatch]: [PokedexState, Dispatch<UpdateAPIActionTypes>] = useReducer(
@@ -18,10 +19,14 @@ function App(): ReactElement {
         initialState,
     );
 
+    const isMountedRef = useIsMountedRef();
+
     const getPokemonInfo = async (url: string, index: number): Promise<void> => {
         try {
             const resultObj = await GetPokemonJSONFromAPI(url);
-            dispatch(updateInfo(index, resultObj));
+            if (isMountedRef.current) {
+                dispatch(updateInfo(index, resultObj));
+            }
         } catch (error) {
             console.error(`Error fetching Pokemon Info. Error: ${error}`);
         }
@@ -30,7 +35,9 @@ function App(): ReactElement {
     const getInitialList = async (): Promise<void> => {
         try {
             const { results } = await GetPokemonJSONFromAPI();
-            dispatch(updateList(results));
+            if (isMountedRef.current) {
+                dispatch(updateList(results));
+            }
         } catch (error) {
             console.error(`Error fetching Pokemon API Resource. Error: ${error}`);
         }
@@ -38,7 +45,11 @@ function App(): ReactElement {
 
     // Once rendered for the first time, then load the initial list once
     useEffect(() => {
+        isMountedRef.current = true;
         getInitialList();
+        return () => {
+            isMountedRef.current = false;
+        };
     }, []);
 
     const { PokemonList, SelectedPokemonIndex, SelectedPokemonInfo } = state;

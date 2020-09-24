@@ -9,7 +9,7 @@ interface NameSectionProps {
 
 function NameSection({ name }: NameSectionProps): ReactElement {
     return (
-        <StyledNameSection>
+        <StyledNameSection title="Pokemon Name">
             <PokemonName name={name} />
         </StyledNameSection>
     );
