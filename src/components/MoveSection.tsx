@@ -11,7 +11,7 @@ interface MoveSectionProps {
 
 function MoveSection({ moveList }: MoveSectionProps): ReactElement {
     return (
-        <section>
+        <section title="moves">
             <Title>Moves</Title>
             <MoveTable moveList={moveList} />
         </section>

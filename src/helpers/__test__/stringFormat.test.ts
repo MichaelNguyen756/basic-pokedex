@@ -1,4 +1,3 @@
-import { format } from 'path';
 import { formatText } from '../stringFormat';
 
 test(`take the string "hp" and return it as full uppercase`, () => {

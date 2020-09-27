@@ -12,10 +12,10 @@ interface StatSectionProps {
 
 function StatSection({ statList }: StatSectionProps): ReactElement {
     return (
-        <section>
+        <section title="stat">
             <Title>Stats</Title>
             <div>
-                <StyledTable bordered>
+                <StyledTable bordered role="table">
                     <tbody>
                         {statList.map(({ stat, base_stat }: PokemonStat, index: number) => (
                             <tr key={index}>

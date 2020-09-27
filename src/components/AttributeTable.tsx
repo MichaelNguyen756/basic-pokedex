@@ -13,7 +13,7 @@ interface AttributeTableProps {
 
 function AttributeTable({ types, abilities }: AttributeTableProps): ReactElement {
     return (
-        <section>
+        <section title="attributes">
             <StyledTable bordered>
                 <tbody>
                     <InfoRow rowTitle="Type">{getTypes(types)}</InfoRow>

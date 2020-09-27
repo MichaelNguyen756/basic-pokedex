@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, Dispatch, ReactElement, useRef } from 'react';
+import React, { useReducer, useEffect, Dispatch, ReactElement } from 'react';
 
 import Panel from './components/Panel';
 import SelectionMenuSection from './components/SelectionMenuSection';
@@ -32,25 +32,25 @@ function App(): ReactElement {
         }
     };
 
-    const getInitialList = async (): Promise<void> => {
-        try {
-            const { results } = await GetPokemonJSONFromAPI();
-            if (isMountedRef.current) {
-                dispatch(updateList(results));
-            }
-        } catch (error) {
-            console.error(`Error fetching Pokemon API Resource. Error: ${error}`);
-        }
-    };
-
     // Once rendered for the first time, then load the initial list once
     useEffect(() => {
+        const getInitialList = async (): Promise<void> => {
+            try {
+                const { results } = await GetPokemonJSONFromAPI();
+                if (isMountedRef.current) {
+                    dispatch(updateList(results));
+                }
+            } catch (error) {
+                console.error(`Error fetching Pokemon API Resource. Error: ${error}`);
+            }
+        };
+
         isMountedRef.current = true;
         getInitialList();
         return () => {
             isMountedRef.current = false;
         };
-    }, []);
+    }, [isMountedRef]);
 
     const { PokemonList, SelectedPokemonIndex, SelectedPokemonInfo } = state;
     const hasSelection: boolean = SelectedPokemonIndex != null && PokemonList.length > 0;

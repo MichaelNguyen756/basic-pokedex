@@ -47,10 +47,17 @@ export function filterMoveList(moveList: PokemonMove[]): MoveAttribute[] {
         }));
 }
 
+export function getCommaSeparatedString<T>(
+    list: T[],
+    formatStringCallback: (arg: T) => string,
+): string {
+    return list.map(formatStringCallback).join(', ');
+}
+
 export function getTypes(list: PokemonType[]): string {
-    return list.map(({ type }) => formatText(type.name)).join(', ');
+    return getCommaSeparatedString(list, ({ type }) => formatText(type.name));
 }
 
 export function getAbilities(list: PokemonAbility[]): string {
-    return list.map(({ ability }) => formatText(ability.name)).join(', ');
+    return getCommaSeparatedString(list, ({ ability }) => formatText(ability.name));
 }

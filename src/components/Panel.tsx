@@ -20,7 +20,7 @@ function Panel({
     name,
 }: PanelProps): ReactElement {
     return (
-        <StyledPanel>
+        <StyledPanel title="Panel">
             <NameSection name={name} />
             <Sprite spriteImg={sprites.front_default} />
             <AttributeTable types={types} abilities={abilities} />

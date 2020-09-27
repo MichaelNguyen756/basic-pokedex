@@ -20,15 +20,17 @@ function SelectionMenuSection({
     return (
         <StyledMenuSection isLoading={menuItemList.length === 0}>
             {menuItemList.length > 0 &&
-                menuItemList.map(({ url, name }: PokemonAPIResource, index: number) => (
-                    <SelectionItem
-                        isSelected={selectedIndex === index}
-                        key={index}
-                        onClickHandler={() => onClickHandler(url, index)}
-                    >
-                        <PokemonName name={name} />
-                    </SelectionItem>
-                ))}
+                menuItemList.map(({ url, name }: PokemonAPIResource, index: number) => {
+                    return (
+                        <SelectionItem
+                            isSelected={selectedIndex === index}
+                            key={index}
+                            onClickHandler={() => onClickHandler(url, index)}
+                        >
+                            <PokemonName name={name} />
+                        </SelectionItem>
+                    );
+                })}
             {menuItemList.length === 0 && <Loading title="loading menu" />}
         </StyledMenuSection>
     );
