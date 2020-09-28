@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { formatText } from '../helpers/stringFormat';
+import { formatText } from '../helpers';
 
 import { MoveAttribute } from '../types/api';
 

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { filterByVersionGroup } from './filters';
+import { filterByVersionGroup } from '.';
 import {
     PokemonAPIResourceList,
     PokemonType,
@@ -9,7 +9,7 @@ import {
     PokemonMoveVersion,
     MoveAttribute,
 } from '../types/api';
-import { formatText } from './stringFormat';
+import { formatText } from './index';
 
 export const PokemonAPIURL: string = 'https://pokeapi.co/api/v2';
 

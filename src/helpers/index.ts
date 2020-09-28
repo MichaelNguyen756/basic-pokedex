@@ -1,3 +1,9 @@
+import { PokemonMoveVersion } from '../types/api';
+
+export function filterByVersionGroup(v: PokemonMoveVersion): boolean {
+    return v.version_group.name === 'red-blue';
+}
+
 export function toUpperFirst(word: string): string {
     return `${word.charAt(0).toUpperCase()}${word.substring(1)}`;
 }

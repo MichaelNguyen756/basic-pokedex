@@ -1,4 +1,4 @@
-import { formatText } from '../stringFormat';
+import { formatText } from '../index';
 
 test(`take the string "hp" and return it as full uppercase`, () => {
     expect(formatText('hp')).toBe('HP');

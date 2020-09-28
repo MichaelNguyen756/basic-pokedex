@@ -4,7 +4,7 @@ import StyledTable from './styled/Table';
 import Title from './Title';
 
 import { PokemonStat } from '../types/api';
-import { formatText } from '../helpers/stringFormat';
+import { formatText } from '../helpers';
 
 interface StatSectionProps {
     statList: PokemonStat[];

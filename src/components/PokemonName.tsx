@@ -2,10 +2,14 @@ import React, { ReactElement } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
 
-import { toUpperFirst } from '../helpers/stringFormat';
+import { toUpperFirst } from '../helpers';
 
 export interface PokemonNameProps {
     name: string;
+}
+
+function isGenderSymbolMale(symbol: string) {
+    return symbol === 'm';
 }
 
 function PokemonName({ name }: PokemonNameProps): ReactElement {
@@ -15,7 +19,10 @@ function PokemonName({ name }: PokemonNameProps): ReactElement {
             <>
                 {toUpperFirst(initialName)}
                 &nbsp;
-                <FontAwesomeIcon icon={genderSymbol === 'm' ? faMars : faVenus} />
+                <FontAwesomeIcon
+                    title={`gender icon ${isGenderSymbolMale(genderSymbol) ? 'male' : 'female'}`}
+                    icon={isGenderSymbolMale(genderSymbol) ? faMars : faVenus}
+                />
             </>
         );
     } else if (name.match(/mr/) && name.match(/mime/)) {

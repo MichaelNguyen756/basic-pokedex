@@ -2,10 +2,11 @@ import React, { ReactElement } from 'react';
 
 import InfoRow from './InfoRow';
 import StyledTable from './styled/Table';
-// import { attributeHeadingBackgroundColour } from './styled/constants';
 
-import { getTypes, getAbilities } from '../helpers/api';
+import { getAbilities } from '../helpers/api';
 import { PokemonType, PokemonAbility } from '../types/api';
+import TypeIcon from './TypeIcon';
+import TypeContainer from './styled/TypeContainer';
 
 interface AttributeTableProps {
     types: PokemonType[];
@@ -17,7 +18,13 @@ function AttributeTable({ types, abilities }: AttributeTableProps): ReactElement
         <section title="attributes">
             <StyledTable striped bordered>
                 <tbody>
-                    <InfoRow rowTitle="Type">{getTypes(types)}</InfoRow>
+                    <InfoRow rowTitle="Type">
+                        <TypeContainer>
+                            {types.map(({ type: { name } }, index) => (
+                                <TypeIcon key={index} type={name} />
+                            ))}
+                        </TypeContainer>
+                    </InfoRow>
                     <InfoRow rowTitle="Abilities">{getAbilities(abilities)}</InfoRow>
                 </tbody>
             </StyledTable>
