@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { filterByVersionGroup } from '.';
 import {
     PokemonAPIResourceList,
-    PokemonType,
     PokemonAbility,
     PokemonMove,
     PokemonMoveVersion,
