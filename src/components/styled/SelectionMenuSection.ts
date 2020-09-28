@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import SelectionItem from './SelectionItem';
 
-import { borderSetting } from './commonValues';
+import { borderSetting } from './constants';
 
 interface SelectionMenuSection {
     isLoading: boolean;
@@ -14,7 +14,7 @@ const SelectionMenuSection = styled.div<SelectionMenuSection>`
     overflow-y: scroll;
     border-top: ${borderSetting};
     border-bottom: ${borderSetting};
-    
+
     ${({ isLoading }) =>
         isLoading &&
         css`
@@ -31,17 +31,15 @@ const SelectionMenuSection = styled.div<SelectionMenuSection>`
         display: block;
         width: 100%;
         border-bottom: none;
-    }
 
-    ${SelectionItem}:first-child {
-        border-top: none;
+        ::first-child {
+            border-top: none;
+        }
     }
 
     ${SelectionItem} + ${SelectionItem} {
         margin-left: 0;
     }
-
-    
 `;
 
 export default SelectionMenuSection;

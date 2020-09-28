@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { borderSetting } from './commonValues';
+import { borderSetting } from './constants';
 
 interface SelectionItemProps {
     isSelected: boolean;

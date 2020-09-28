@@ -37,6 +37,7 @@ Default.args = {
         },
     ],
     selectedIndex: null,
+    dispatch: () => {},
 };
 
 export const WithSpecialPokemon = Template.bind({});
@@ -59,4 +60,5 @@ export const EmptySelection = Template.bind({});
 EmptySelection.args = {
     menuItemList: [],
     selectedIndex: null,
+    dispatch: () => {},
 };

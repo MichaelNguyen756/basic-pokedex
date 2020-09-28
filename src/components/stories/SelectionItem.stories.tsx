@@ -14,12 +14,12 @@ const Template: Story<SelectionItemProps> = args => <SelectionItem {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    buttonText: 'Default',
+    children: <>Default</>,
     isSelected: false,
 };
 
 export const Selected = Template.bind({});
 Selected.args = {
-    buttonText: 'Selected',
+    children: <>Selected</>,
     isSelected: true,
 };

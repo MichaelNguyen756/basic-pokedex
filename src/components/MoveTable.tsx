@@ -24,7 +24,7 @@ function renderMoveRows(moveList: PokemonMove[]): ReactElement[] {
 function MoveTable({ moveList }: MoveTableProps): ReactElement {
     return (
         <div>
-            <StyledTable bordered>
+            <StyledTable bordered striped>
                 <thead>
                     <tr>
                         <th>Learns At</th>

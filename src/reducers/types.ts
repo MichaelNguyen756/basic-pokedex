@@ -6,7 +6,7 @@ export const UPDATE_INFO = 'UPDATE_INFO';
 export interface PokedexState {
     PokemonList: PokemonAPIResource[];
     SelectedPokemonIndex: number | null;
-    SelectedPokemonInfo: Pokemon | null;
+    SelectedPokemonInfo: Pokemon | undefined;
 }
 
 export interface UpdateInfoPayload {

@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 
 import InfoRow from './InfoRow';
 import StyledTable from './styled/Table';
+// import { attributeHeadingBackgroundColour } from './styled/constants';
 
 import { getTypes, getAbilities } from '../helpers/api';
 import { PokemonType, PokemonAbility } from '../types/api';
@@ -14,7 +15,7 @@ interface AttributeTableProps {
 function AttributeTable({ types, abilities }: AttributeTableProps): ReactElement {
     return (
         <section title="attributes">
-            <StyledTable bordered>
+            <StyledTable striped bordered>
                 <tbody>
                     <InfoRow rowTitle="Type">{getTypes(types)}</InfoRow>
                     <InfoRow rowTitle="Abilities">{getAbilities(abilities)}</InfoRow>

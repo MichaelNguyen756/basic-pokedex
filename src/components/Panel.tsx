@@ -12,12 +12,10 @@ import { Pokemon } from '../types/api';
 
 interface PanelProps {
     info: Pokemon;
-    name: string;
 }
 
 function Panel({
-    info: { abilities, types, sprites, stats, moves },
-    name,
+    info: { abilities, types, sprites, stats, moves, name },
 }: PanelProps): ReactElement {
     return (
         <StyledPanel title="Panel">

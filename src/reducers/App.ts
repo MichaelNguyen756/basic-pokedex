@@ -3,7 +3,7 @@ import { PokedexState, UPDATE_INFO, UPDATE_LIST, UpdateAPIActionTypes } from './
 export const initialState: PokedexState = {
     PokemonList: [],
     SelectedPokemonIndex: null,
-    SelectedPokemonInfo: null,
+    SelectedPokemonInfo: undefined,
 };
 
 export function Reducer(

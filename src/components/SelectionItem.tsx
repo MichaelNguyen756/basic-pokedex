@@ -9,15 +9,9 @@ export interface SelectionItemProps {
     children?: ReactNode | ReactNodeArray;
 }
 
-function SelectionItem({
-    onClickHandler,
-    isSelected,
-    buttonText,
-    children,
-}: SelectionItemProps): ReactElement {
+function SelectionItem({ onClickHandler, isSelected, children }: SelectionItemProps): ReactElement {
     return (
         <StyledSelectionItem isSelected={isSelected} onClick={onClickHandler} role="button">
-            {buttonText}
             {children}
         </StyledSelectionItem>
     );

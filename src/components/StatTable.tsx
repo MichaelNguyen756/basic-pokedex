@@ -15,7 +15,7 @@ function StatSection({ statList }: StatSectionProps): ReactElement {
         <section title="stat">
             <Title>Stats</Title>
             <div>
-                <StyledTable bordered role="table">
+                <StyledTable striped bordered role="table">
                     <tbody>
                         {statList.map(({ stat, base_stat }: PokemonStat, index: number) => (
                             <tr key={index}>
