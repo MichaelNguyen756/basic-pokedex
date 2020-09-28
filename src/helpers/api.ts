@@ -54,10 +54,6 @@ export function getCommaSeparatedString<T>(
     return list.map(formatStringCallback).join(', ');
 }
 
-export function getTypes(list: PokemonType[]): string {
-    return getCommaSeparatedString(list, ({ type }) => formatText(type.name));
-}
-
 export function getAbilities(list: PokemonAbility[]): string {
     return getCommaSeparatedString(list, ({ ability }) => formatText(ability.name));
 }
