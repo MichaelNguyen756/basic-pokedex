@@ -1,19 +1,27 @@
 import { PokemonMoveVersion } from '../types/api';
 
 export function filterByVersionGroup(v: PokemonMoveVersion): boolean {
-    return v.version_group.name === 'red-blue';
+  return v.version_group.name === 'red-blue';
 }
 
 export function toUpperFirst(word: string): string {
-    return `${word.charAt(0).toUpperCase()}${word.substring(1)}`;
+  return `${word.charAt(0).toUpperCase()}${word.substring(1)}`;
 }
 
 export function formatText(text: string = ''): string {
-    const [firstWord, ...additionalWords] = text.split('-');
+  const [firstWord, ...additionalWords] = text.split('-');
 
-    if (firstWord === 'hp') {
-        return firstWord.toUpperCase();
-    }
+  if (firstWord === 'hp') {
+    return firstWord.toUpperCase();
+  }
 
-    return [toUpperFirst(firstWord), ...additionalWords].join(' ');
+  return [toUpperFirst(firstWord), ...additionalWords].join(' ');
+}
+
+export function callAll(...fns: any[]) {
+  return (...args: any[]) => {
+    fns.forEach(fn => {
+      fn && fn(...args);
+    });
+  };
 }

@@ -5,31 +5,33 @@ import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
 import { toUpperFirst } from '../helpers';
 
 export interface PokemonNameProps {
-    name: string;
+  name: string;
 }
 
 function isGenderSymbolMale(symbol: string) {
-    return symbol === 'm';
+  return symbol === 'm';
 }
 
 function PokemonName({ name }: PokemonNameProps): ReactElement {
-    if (name.match(/nidoran/)) {
-        const [initialName, genderSymbol] = name.split('-');
-        return (
-            <>
-                {toUpperFirst(initialName)}
-                &nbsp;
-                <FontAwesomeIcon
-                    title={`gender icon ${isGenderSymbolMale(genderSymbol) ? 'male' : 'female'}`}
-                    icon={isGenderSymbolMale(genderSymbol) ? faMars : faVenus}
-                />
-            </>
-        );
-    } else if (name.match(/mr/) && name.match(/mime/)) {
-        return <>Mr. Mime</>;
-    } else {
-        return <>{toUpperFirst(name)}</>;
-    }
+  if (name.match(/nidoran/i)) {
+    const [initialName, genderSymbol] = name.split('-');
+    return (
+      <>
+        {toUpperFirst(initialName)}
+        &nbsp;
+        <FontAwesomeIcon
+          title={`gender icon ${isGenderSymbolMale(genderSymbol) ? 'male' : 'female'}`}
+          icon={isGenderSymbolMale(genderSymbol) ? faMars : faVenus}
+        />
+      </>
+    );
+  } else if (name.match(/mr/i) && name.match(/mime/i)) {
+    return <>Mr. Mime</>;
+  } else if (name.match(/farfetchd/i)) {
+    return <>Farfetch'd</>;
+  } else {
+    return <>{toUpperFirst(name)}</>;
+  }
 }
 
 export default PokemonName;

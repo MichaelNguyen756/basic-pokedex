@@ -1,65 +1,56 @@
-import React, { Dispatch, ReactElement, useEffect } from 'react';
-import { UpdateAPIActionTypes } from '../reducers/types';
-import { PokemonAPIResource } from '../types/api';
+import React, { ReactElement, useEffect, useReducer } from 'react';
 
-import StyledMenuSection from './styled/SelectionMenuSection';
 import Loading from './Loading';
-import SelectionItem from './SelectionItem';
 import PokemonName from './PokemonName';
-import { updateInfo } from '../reducers/actions';
+import { PokemonAPIResource } from '../types/api';
+import useSafeDispatch from '../hooks/useSafeDispatch';
 import { GetPokemonJSONFromAPI } from '../helpers/api';
-import useIsMountedRef from '../hooks/useIsMountedRef';
+import StyledMenuSection from './styled/SelectionMenuSection';
+import asyncReducer, { asyncStatus } from '../helpers/asyncReducer';
+import SelectionItem from './styled/SelectionItem';
 
 export interface SelectionMenuSectionProps {
-    selectedIndex: number | null;
-    menuItemList: PokemonAPIResource[];
-    dispatch: Dispatch<UpdateAPIActionTypes>;
+  pokemonURL: string;
+  onClick: (url: string) => void;
 }
 
-function SelectionMenuSection({
-    selectedIndex,
-    menuItemList: menuList,
-    dispatch,
+const LoadMenu = ({ status }: { status: string }) =>
+  status === asyncStatus.pending ? <Loading title="loading menu" /> : null;
+
+export default function SelectionMenuSection({
+  pokemonURL,
+  onClick,
 }: SelectionMenuSectionProps): ReactElement {
-    const isMountedRef = useIsMountedRef();
+  const [{ data: menu, status }, unsafeDispatch] = useReducer(asyncReducer, {
+    status: asyncStatus.idle,
+    data: null,
+    error: null,
+  });
 
-    const getPokemonInfo = async (url: string, index: number): Promise<void> => {
-        try {
-            const resultObj = await GetPokemonJSONFromAPI(url);
-            if (isMountedRef.current) {
-                dispatch(updateInfo(index, resultObj));
-            }
-        } catch (error) {
-            console.error(`Error fetching Pokemon Info. Error: ${error}`);
-        }
+  const dispatch = useSafeDispatch(unsafeDispatch);
+
+  useEffect(() => {
+    const getInitialList = async (): Promise<void> => {
+      dispatch({ type: asyncStatus.pending });
+
+      try {
+        const { results: data } = await GetPokemonJSONFromAPI();
+        dispatch({ type: asyncStatus.resolved, data });
+      } catch (error) {
+        dispatch({ type: asyncStatus.rejected, error });
+      }
     };
-
-    useEffect(() => {
-        isMountedRef.current = true;
-        return () => {
-            isMountedRef.current = false;
-        };
-    }, [isMountedRef]);
-
-    return (
-        <StyledMenuSection isLoading={menuList.length === 0}>
-            {menuList.length > 0 ? (
-                menuList.map(({ url, name }: PokemonAPIResource, index: number) => {
-                    return (
-                        <SelectionItem
-                            isSelected={selectedIndex === index}
-                            key={index}
-                            onClickHandler={() => getPokemonInfo(url, index)}
-                        >
-                            <PokemonName name={name} />
-                        </SelectionItem>
-                    );
-                })
-            ) : (
-                <Loading title="loading menu" />
-            )}
-        </StyledMenuSection>
-    );
+    getInitialList();
+  }, [dispatch]);
+  return (
+    <StyledMenuSection isLoading={status === asyncStatus.pending}>
+      {status === asyncStatus.resolved &&
+        menu.map(({ url, name }: PokemonAPIResource) => (
+          <SelectionItem isSelected={pokemonURL === url} key={name} onClick={() => onClick(url)}>
+            <PokemonName name={name} />
+          </SelectionItem>
+        ))}
+      <LoadMenu status={status} />
+    </StyledMenuSection>
+  );
 }
-
-export default SelectionMenuSection;
