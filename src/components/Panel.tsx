@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useReducer } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import StyledPanel from './styled/Panel';
 import StatSection from './StatTable';
@@ -10,8 +10,8 @@ import AttributeTable from './AttributeTable';
 import Loading from './Loading';
 
 import { getMoveList, GetPokemonJSONFromAPI } from '../helpers/api';
-import asyncReducer, { asyncStatus } from '../helpers/asyncReducer';
-import useSafeDispatch from '../hooks/useSafeDispatch';
+import { asyncStatus } from '../helpers/asyncReducer';
+import useAsync from '../hooks/useAsync';
 import { Pokemon } from '../types/api';
 
 interface PanelProps {
@@ -39,30 +39,18 @@ const PokemonData = ({ data }: { data: Pokemon | null }) =>
   ) : null;
 
 export default function Panel({ pokemonURL }: PanelProps): ReactElement | null {
-  const [{ data, status, error }, unsafeDispatch] = useReducer(asyncReducer, {
-    status: asyncStatus.idle,
-    data: null,
-    error: null,
+  const { data, status, error, run } = useAsync({
+    initialState: {
+      status: pokemonURL ? asyncStatus.pending : asyncStatus.idle,
+    },
   });
 
-  const dispatch = useSafeDispatch(unsafeDispatch);
   useEffect(() => {
-    if (pokemonURL === '') {
+    if (!pokemonURL) {
       return;
     }
-
-    const getInfoFromURL = async (): Promise<void> => {
-      dispatch({ type: asyncStatus.pending });
-      try {
-        const resultObj = await GetPokemonJSONFromAPI(pokemonURL);
-        dispatch({ type: asyncStatus.resolved, data: resultObj });
-      } catch (error) {
-        console.error(`Error fetching Pokemon Info. Error: ${error}`);
-      }
-    };
-
-    getInfoFromURL();
-  }, [pokemonURL, dispatch]);
+    return run(GetPokemonJSONFromAPI(pokemonURL));
+  }, [pokemonURL, run]);
 
   return (
     <StyledPanel title="Panel">

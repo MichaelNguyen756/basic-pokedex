@@ -1,13 +1,13 @@
-import React, { ReactElement, useEffect, useReducer } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import Loading from './Loading';
 import PokemonName from './PokemonName';
 import { PokemonAPIResource } from '../types/api';
-import useSafeDispatch from '../hooks/useSafeDispatch';
 import { GetPokemonJSONFromAPI } from '../helpers/api';
 import StyledMenuSection from './styled/SelectionMenuSection';
-import asyncReducer, { asyncStatus } from '../helpers/asyncReducer';
+import { asyncStatus } from '../helpers/asyncReducer';
 import SelectionItem from './styled/SelectionItem';
+import useAsync from '../hooks/useAsync';
 
 export interface SelectionMenuSectionProps {
   pokemonURL: string;
@@ -21,31 +21,22 @@ export default function SelectionMenuSection({
   pokemonURL,
   onClick,
 }: SelectionMenuSectionProps): ReactElement {
-  const [{ data: menu, status }, unsafeDispatch] = useReducer(asyncReducer, {
-    status: asyncStatus.idle,
-    data: null,
-    error: null,
+  const { data: menu, run, status } = useAsync({
+    initialState: {
+      status: asyncStatus.idle,
+      data: null,
+      error: null,
+    },
   });
 
-  const dispatch = useSafeDispatch(unsafeDispatch);
-
   useEffect(() => {
-    const getInitialList = async (): Promise<void> => {
-      dispatch({ type: asyncStatus.pending });
+    return run(GetPokemonJSONFromAPI());
+  }, [run]);
 
-      try {
-        const { results: data } = await GetPokemonJSONFromAPI();
-        dispatch({ type: asyncStatus.resolved, data });
-      } catch (error) {
-        dispatch({ type: asyncStatus.rejected, error });
-      }
-    };
-    getInitialList();
-  }, [dispatch]);
   return (
     <StyledMenuSection isLoading={status === asyncStatus.pending}>
       {status === asyncStatus.resolved &&
-        menu.map(({ url, name }: PokemonAPIResource) => (
+        menu.results.map(({ url, name }: PokemonAPIResource) => (
           <SelectionItem isSelected={pokemonURL === url} key={name} onClick={() => onClick(url)}>
             <PokemonName name={name} />
           </SelectionItem>

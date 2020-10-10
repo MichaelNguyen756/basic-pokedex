@@ -1,4 +1,4 @@
-interface asyncState {
+export interface asyncState {
   status: string;
   data: any;
   error: Error | null;
