@@ -3,31 +3,31 @@ import styled from 'styled-components';
 import { borderSetting } from './constants';
 
 interface SelectionItemProps {
-    isSelected: boolean;
+  isSelected: boolean;
 }
 
 const SelectionItem = styled.button<SelectionItemProps>`
-    border-style: solid;
-    padding: 5px 10px;
-    background-color: ${({ isSelected }) => (isSelected ? 'coral' : 'transparent')};
+  border-style: solid;
+  padding: 5px 10px;
+  background-color: ${({ isSelected }) => (isSelected ? 'coral' : 'transparent')};
 
-    /**
+  /**
         This is for testing in isolation
      */
-    &::not(:only-child) {
-        border-right: ${borderSetting};
-        border-bottom: ${borderSetting};
-        border-left: ${borderSetting};
-    }
+  &::not(:only-child) {
+    border-right: ${borderSetting};
+    border-bottom: ${borderSetting};
+    border-left: ${borderSetting};
+  }
 
-    &:last-child::not(:only-child) {
-        border-bottom: 0;
-    }
+  &:last-child::not(:only-child) {
+    border-bottom: 0;
+  }
 
-    &:hover {
-        background-color: #61dafb;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: #61dafb;
+    cursor: pointer;
+  }
 `;
 
 export default SelectionItem;

@@ -4,15 +4,15 @@ import PokemonName from './PokemonName';
 import StyledNameSection from './styled/NameSection';
 
 interface NameSectionProps {
-    name: string;
+  name: string;
 }
 
 function NameSection({ name }: NameSectionProps): ReactElement {
-    return (
-        <StyledNameSection title="Pokemon Name">
-            <PokemonName name={name} />
-        </StyledNameSection>
-    );
+  return (
+    <StyledNameSection title="Pokemon Name">
+      <PokemonName name={name} />
+    </StyledNameSection>
+  );
 }
 
 export default NameSection;

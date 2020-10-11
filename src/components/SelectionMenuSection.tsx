@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect } from 'react';
 import Loading from './Loading';
 import PokemonName from './PokemonName';
 import { PokemonAPIResource } from '../types/api';
-import { GetPokemonJSONFromAPI } from '../helpers/api';
+import { getPokemonURL } from '../helpers/api';
 import StyledMenuSection from './styled/SelectionMenuSection';
 import { asyncStatus } from '../helpers/asyncReducer';
 import SelectionItem from './styled/SelectionItem';
@@ -11,7 +11,7 @@ import useAsync from '../hooks/useAsync';
 
 export interface SelectionMenuSectionProps {
   pokemonURL: string;
-  onClick: (url: string) => void;
+  onClick: (url: string, name: string) => void;
 }
 
 const LoadMenu = ({ status }: { status: string }) =>
@@ -30,14 +30,18 @@ export default function SelectionMenuSection({
   });
 
   useEffect(() => {
-    return run(GetPokemonJSONFromAPI());
+    return run(getPokemonURL());
   }, [run]);
 
   return (
     <StyledMenuSection isLoading={status === asyncStatus.pending}>
       {status === asyncStatus.resolved &&
         menu.results.map(({ url, name }: PokemonAPIResource) => (
-          <SelectionItem isSelected={pokemonURL === url} key={name} onClick={() => onClick(url)}>
+          <SelectionItem
+            isSelected={pokemonURL === url}
+            key={name}
+            onClick={() => onClick(url, name)}
+          >
             <PokemonName name={name} />
           </SelectionItem>
         ))}

@@ -17,27 +17,6 @@ Default.args = {
   ...SelectionItemStories.Default.args,
   pokemonURL: '',
   onClick: () => {},
-  // menuItemList: [
-  //     { name: 'pikachu', url: `${PokemonAPIURL}/pikachu` },
-  //     {
-  //         name: 'bulbasaur',
-  //         url: `${PokemonAPIURL}/bulbasaur`,
-  //     },
-  //     {
-  //         name: 'charmander',
-  //         url: `${PokemonAPIURL}/charmander`,
-  //     },
-  //     {
-  //         name: 'squirtle',
-  //         url: `${PokemonAPIURL}/squirtle`,
-  //     },
-  //     {
-  //         name: 'growlithe',
-  //         url: `${PokemonAPIURL}/growlithe`,
-  //     },
-  // ],
-  // selectedIndex: null,
-  // dispatch: () => {},
 };
 
 // export const WithSpecialPokemon = Template.bind({});

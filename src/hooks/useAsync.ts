@@ -24,10 +24,13 @@ export default function useAsync({ initialState = {}, reducer = asyncReducer }) 
     [dispatch],
   );
 
+  const setState = useCallback(data => dispatch({ type: asyncStatus.resolved, data }), [dispatch]);
+
   return {
     error,
     status,
     data,
     run,
+    setState,
   };
 }

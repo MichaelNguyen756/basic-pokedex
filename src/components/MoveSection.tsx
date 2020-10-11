@@ -6,16 +6,16 @@ import MoveTable from './MoveTable';
 import { PokemonMove } from '../types/api';
 
 interface MoveSectionProps {
-    moveList: PokemonMove[];
+  moveList: PokemonMove[];
 }
 
 function MoveSection({ moveList }: MoveSectionProps): ReactElement {
-    return (
-        <section title="moves">
-            <Title>Moves</Title>
-            <MoveTable moveList={moveList} />
-        </section>
-    );
+  return (
+    <section title="moves">
+      <Title>Moves</Title>
+      <MoveTable moveList={moveList} />
+    </section>
+  );
 }
 
 export default MoveSection;

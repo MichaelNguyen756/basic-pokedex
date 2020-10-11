@@ -13,6 +13,7 @@ function Loading({ title = 'loading', text = '' }: LoadingProps): ReactElement {
   return (
     <StyledLoading>
       {text}
+      &nbsp;
       <FontAwesomeIcon icon={faSpinner} spin title={title} />
     </StyledLoading>
   );

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect, useReducer } from 'react';
 
 import StyledPanel from './styled/Panel';
 import StatSection from './StatTable';
@@ -9,13 +9,14 @@ import Sprite from './Sprite';
 import AttributeTable from './AttributeTable';
 import Loading from './Loading';
 
-import { getMoveList, GetPokemonJSONFromAPI } from '../helpers/api';
+import { getMoveList, getPokemon } from '../helpers/api';
 import { asyncStatus } from '../helpers/asyncReducer';
 import useAsync from '../hooks/useAsync';
 import { Pokemon } from '../types/api';
 
 interface PanelProps {
   pokemonURL: string;
+  pokemonName: string;
 }
 
 const EmptySection = ({ status }: { status: string }) =>
@@ -38,20 +39,41 @@ const PokemonData = ({ data }: { data: Pokemon | null }) =>
     </>
   ) : null;
 
-export default function Panel({ pokemonURL }: PanelProps): ReactElement | null {
-  const { data, status, error, run } = useAsync({
+function cacheReducer(state: any, action: any) {
+  switch (action.type) {
+    case 'ADD_POKEMON': {
+      return { ...state, [action.name]: action.data };
+    }
+
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`);
+    }
+  }
+}
+
+export default function Panel({ pokemonURL, pokemonName }: PanelProps): ReactElement | null {
+  const { data, status, error, run, setState } = useAsync({
     initialState: {
       status: pokemonURL ? asyncStatus.pending : asyncStatus.idle,
     },
   });
 
+  const [cache, dispatch] = useReducer(cacheReducer, {});
+
   useEffect(() => {
     if (!pokemonURL) {
       return;
+    } else if (cache[pokemonName]) {
+      setState(cache[pokemonName]);
+    } else {
+      run(
+        getPokemon(pokemonURL).then(pokemonData => {
+          dispatch({ type: 'ADD_POKEMON', name: pokemonName, data: pokemonData });
+          return pokemonData;
+        }),
+      );
     }
-    return run(GetPokemonJSONFromAPI(pokemonURL));
-  }, [pokemonURL, run]);
-
+  }, [cache, pokemonName, dispatch, pokemonURL, run, setState]);
   return (
     <StyledPanel title="Panel">
       <PokemonData data={data} />
