@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { filterByVersionGroup } from '.';
+import { isVersionGroupRedBlue } from '.';
 import {
   PokemonAPIResourceList,
   PokemonAbility,
@@ -43,10 +43,10 @@ export function filterMoveList(moveList: PokemonMove[]): MoveAttribute[] {
   return moveList
     .filter(
       ({ version_group_details }: PokemonMove) =>
-        version_group_details.find(filterByVersionGroup) !== undefined,
+        version_group_details.find(isVersionGroupRedBlue) !== undefined,
     )
     .map(({ version_group_details, move }: PokemonMove) => ({
-      levelAt: version_group_details.find(filterByVersionGroup)?.level_learned_at,
+      levelAt: version_group_details.find(isVersionGroupRedBlue)?.level_learned_at,
       moveName: move.name,
     }));
 }

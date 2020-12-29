@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import PokemonName from '../PokemonName';
+import PokemonName from '../molecules/PokemonName';
 
 /**
  * This unit test has very specific cases

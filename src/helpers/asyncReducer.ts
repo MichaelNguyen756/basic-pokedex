@@ -1,15 +1,10 @@
+import { asyncStatus } from '../components/constants';
+
 export interface asyncState {
   status: string;
   data: any;
   error: Error | null;
 }
-
-export const asyncStatus = {
-  idle: 'idle',
-  pending: 'pending',
-  resolved: 'resolved',
-  rejected: 'rejected',
-};
 
 export const defaultState: asyncState = {
   status: asyncStatus.idle,

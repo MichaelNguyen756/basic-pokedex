@@ -1,9 +1,9 @@
 import React, { ReactElement, useState } from 'react';
 
-import Panel from './components/Panel';
-import InfoPanel from './components/styled/InfoPanel';
-import SelectionMenuSection from './components/SelectionMenuSection';
-import EmptySelectionSection from './components/EmptySelectionSection';
+import Panel from './components/organisms/Panel';
+import InfoPanel from './components/organisms/InfoPanel';
+import SelectionMenuSection from './components/organisms/SelectionMenuSection';
+import EmptySelectionSection from './components/atoms/EmptySelectionSection';
 
 import StyledApp from './StyledApp';
 
