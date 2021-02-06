@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
 
 import SelectionItem from '../../molecules/SelectionItem/styled';
-
 import { borderSetting } from '../../constants';
 
-interface SelectionMenuSection {
+interface SelectionMenuSectionProps {
   isLoading: boolean;
 }
 
-const SelectionMenuSection = styled.div<SelectionMenuSection>`
+const SelectionMenuSection = styled.div<SelectionMenuSectionProps>`
   height: 100%;
   flex: 0 0 auto;
   overflow-y: scroll;

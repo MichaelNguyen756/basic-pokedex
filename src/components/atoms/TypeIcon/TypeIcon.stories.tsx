@@ -1,13 +1,23 @@
-import React from 'react';
-import { Story, Meta } from '@storybook/react/types-6-0';
-
+import { Meta, Story } from '@storybook/react/types-6-0';
 import TypeIcon, { TypeIconProps } from '.';
+
+import React from 'react';
 
 export default {
   component: TypeIcon,
   title: 'Atoms/Type Icon',
   decorators: [
-    story => <div style={{ padding: '3rem', width: '150px', height: '50px' }}>{story()}</div>,
+    story => (
+      <div
+        style={{
+          padding: '3rem',
+          width: '150px',
+          height: '50px',
+        }}
+      >
+        {story()}
+      </div>
+    ),
   ],
 } as Meta;
 

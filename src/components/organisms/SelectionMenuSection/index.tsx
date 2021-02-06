@@ -1,12 +1,12 @@
 import React, { ReactElement, useEffect } from 'react';
 
 import Loading from '../../atoms/Loading';
-import PokemonName from '../../molecules/PokemonName';
 import { PokemonAPIResource } from '../../../types/api';
-import { getPokemonURL } from '../../../helpers/api';
-import StyledMenuSection from './SelectionMenuSection';
-import { asyncStatus } from '../../../helpers/asyncReducer';
+import PokemonName from '../../molecules/PokemonName';
 import SelectionItem from '../../molecules/SelectionItem';
+import StyledMenuSection from './SelectionMenuSection';
+import { asyncStatus } from '../../constants';
+import { getPokemonURL } from '../../../helpers/api';
 import useAsync from '../../hooks/useAsync';
 
 export interface SelectionMenuSectionProps {
@@ -23,7 +23,7 @@ export default function SelectionMenuSection({
 }: SelectionMenuSectionProps): ReactElement {
   const { data: menu, run, status } = useAsync({
     initialState: {
-      status: asyncStatus.idle,
+      status: asyncStatus,
       data: null,
       error: null,
     },
