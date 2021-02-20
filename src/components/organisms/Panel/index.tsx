@@ -1,19 +1,17 @@
 import React, { ReactElement, useEffect, useReducer } from 'react';
+import { getMoveList, getPokemon } from '../../../helpers/api';
 
-import StyledPanel from './styled';
-import StatSection from '../../molecules/StatTable';
-import MoveSection from '../../molecules/MoveSection';
-
-import NameSection from '../../molecules/NameSection';
+import AttributeTable from '../../molecules/AttributeTable';
 import EmptySelectionSection from '../../atoms/EmptySelectionSection';
 import Loading from '../../atoms/Loading';
+import MoveSection from '../../molecules/MoveSection';
+import NameSection from '../../molecules/NameSection';
+import { Pokemon } from '../../../types/api';
 import Sprite from '../../atoms/Sprite';
-import AttributeTable from '../../molecules/AttributeTable';
-
-import { getMoveList, getPokemon } from '../../../helpers/api';
+import StatSection from '../../molecules/StatTable';
+import StyledPanel from './styled';
 import { asyncStatus } from '../../constants';
 import useAsync from '../../hooks/useAsync';
-import { Pokemon } from '../../../types/api';
 
 interface PanelProps {
   pokemonURL: string;
@@ -76,7 +74,7 @@ export default function Panel({ pokemonURL, pokemonName }: PanelProps): ReactEle
     }
   }, [cache, pokemonName, dispatch, pokemonURL, run, setState]);
   return (
-    <StyledPanel title="Panel">
+    <StyledPanel title="Panel" isLoading={status === asyncStatus.pending}>
       <PokemonData data={data} />
       <LoadingPanel status={status} />
       <EmptySection status={status} />
