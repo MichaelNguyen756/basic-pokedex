@@ -26,6 +26,7 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -64,11 +65,6 @@
     "msw": "^0.21.2",
     "prettier": "^2.0.5",
     "react-is": "^16.13.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
