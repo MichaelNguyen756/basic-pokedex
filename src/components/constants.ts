@@ -1,6 +1,6 @@
 import { pokemonTypeColours } from '../types/index';
 
-export const borderSetting: string = '1px solid #000000';
+export const borderSetting = '1px solid #000000';
 
 export const typeColours: pokemonTypeColours = {
   bug: {

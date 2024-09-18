@@ -5,7 +5,7 @@ import PokemonName, { PokemonNameProps } from '.';
 
 export default {
   component: PokemonName,
-  title: 'Atoms/Pokemon Name',
+  title: 'Molecules/Pokemon Name',
 } as Meta;
 
 const Template: Story<PokemonNameProps> = args => <PokemonName {...args} />;
@@ -17,18 +17,15 @@ Default.args = {
 
 export const NidoranMale = Template.bind({});
 NidoranMale.args = {
-  ...Default.args,
   name: 'nidoran-m',
 };
 
 export const NidoranFemale = Template.bind({});
 NidoranFemale.args = {
-  ...Default.args,
   name: 'nidoran-f',
 };
 
 export const MrMime = Template.bind({});
 MrMime.args = {
-  ...Default.args,
   name: 'mr-mime',
 };

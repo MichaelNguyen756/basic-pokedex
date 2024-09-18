@@ -1,23 +1,15 @@
-import React, { ReactElement } from 'react';
-import { PokemonSprites } from '../../../types/api';
+import React from 'react';
+import styled from 'styled-components';
 
-import SpriteImage from './SpriteImage';
+const SpriteImage = styled.img`
+  aspect-ratio: 1;
+  width: 30%;
+`;
 
-const imageDimension: string = '105';
-
-interface SpriteProps {
-  spriteImg: PokemonSprites;
-}
-
-function Sprite({ spriteImg }: SpriteProps): ReactElement {
+function Sprite({ spriteImg }: { spriteImg: string }) {
   return (
     <div title="Sprite">
-      <SpriteImage
-        src={spriteImg.front_default}
-        alt="sprite"
-        width={imageDimension}
-        height={imageDimension}
-      />
+      <SpriteImage src={spriteImg} alt="sprite" />
     </div>
   );
 }

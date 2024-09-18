@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import SelectionItem, { SelectionItemProps } from './styled';
+import SelectionItem, { SelectionItemProps } from '.';
 
 export default {
   component: SelectionItem,

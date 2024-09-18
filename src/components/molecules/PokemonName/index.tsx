@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,7 +12,7 @@ function isGenderSymbolMale(symbol: string) {
   return symbol === 'm';
 }
 
-function PokemonName({ name }: PokemonNameProps): ReactElement {
+function PokemonName({ name }: PokemonNameProps) {
   if (name.match(/nidoran/i)) {
     const [initialName, genderSymbol] = name.split('-');
     return (

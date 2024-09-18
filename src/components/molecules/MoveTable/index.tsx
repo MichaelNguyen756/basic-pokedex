@@ -1,5 +1,5 @@
-import React, { ReactElement } from 'react';
-import _ from 'lodash';
+import React from 'react';
+import orderBy from 'lodash/orderBy';
 
 import StyledTable from '../Table';
 import MoveRow from '../../atoms/MoveRow';
@@ -7,21 +7,15 @@ import MoveRow from '../../atoms/MoveRow';
 import { filterMoveList } from '../../../helpers/api';
 import { PokemonMove, MoveAttribute } from '../../../types/api';
 
-interface MoveTableProps {
-  moveList: PokemonMove[];
+function renderMoveRows(moveList: PokemonMove[]) {
+  return orderBy(filterMoveList(moveList), ['levelAt'], ['asc']).map(
+    ({ levelAt, moveName }: MoveAttribute, index: number) => (
+      <MoveRow key={index} levelLearntNumber={levelAt} moveName={moveName} />
+    ),
+  );
 }
 
-function renderMoveRows(moveList: PokemonMove[]): ReactElement[] {
-  return _.orderBy(
-    filterMoveList(moveList),
-    ['levelAt'],
-    ['asc'],
-  ).map(({ levelAt, moveName }: MoveAttribute, index: number) => (
-    <MoveRow key={index} levelAt={levelAt} moveName={moveName} />
-  ));
-}
-
-function MoveTable({ moveList }: MoveTableProps): ReactElement {
+function MoveTable({ moveList }: { moveList: PokemonMove[] }) {
   return (
     <div>
       <StyledTable bordered striped>

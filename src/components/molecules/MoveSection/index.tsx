@@ -1,15 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import Title from '../../atoms/Title';
 import MoveTable from '../MoveTable';
 
 import { PokemonMove } from '../../../types/api';
 
-interface MoveSectionProps {
-  moveList: PokemonMove[];
-}
-
-function MoveSection({ moveList }: MoveSectionProps): ReactElement {
+function MoveSection({ moveList }: { moveList: PokemonMove[] }) {
   return (
     <section title="moves">
       <Title>Moves</Title>

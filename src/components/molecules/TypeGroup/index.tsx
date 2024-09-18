@@ -1,21 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import TypeContainer from './TypeContainer';
 import TypeIcon from '../../atoms/TypeIcon';
 
 import { PokemonType } from '../../../types/api';
 
-interface TypeGroupProps {
-  types: PokemonType[];
-}
+const Container = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
 
-function TypeGroup({ types }: TypeGroupProps) {
+function TypeGroup({ types }: { types: PokemonType[] }) {
   return (
-    <TypeContainer>
+    <Container>
       {types.map(({ type: { name } }, index) => (
         <TypeIcon key={index} type={name} />
       ))}
-    </TypeContainer>
+    </Container>
   );
 }
 

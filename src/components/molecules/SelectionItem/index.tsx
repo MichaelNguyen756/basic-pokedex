@@ -1,19 +1,38 @@
-import React, { ReactElement, ReactNode, ReactNodeArray } from 'react';
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
 
-import StyledSelectionItem from './styled';
+import { borderSetting } from '../../constants';
 
 export interface SelectionItemProps {
   onClick?: () => void;
-  isSelected: boolean;
+  isSelected?: boolean;
   buttonText?: ReactNode;
-  children?: ReactNode | ReactNodeArray;
+  children?: ReactNode;
 }
 
-function SelectionItem({ onClick, isSelected, children }: SelectionItemProps): ReactElement {
+const StyledButton = styled.button<{
+  isSelected?: boolean;
+  children?: ReactNode;
+}>`
+  border-style: solid;
+  padding: 5px 10px;
+  background-color: ${({ isSelected }) => (isSelected ? 'coral' : 'transparent')};
+
+  &:last-child::not(:only-child) {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background-color: #61dafb;
+    cursor: pointer;
+  }
+`;
+
+function SelectionItem({ onClick, isSelected, children }: SelectionItemProps) {
   return (
-    <StyledSelectionItem isSelected={isSelected} onClick={onClick} role="button">
+    <StyledButton isSelected={isSelected} onClick={onClick} role="button">
       {children}
-    </StyledSelectionItem>
+    </StyledButton>
   );
 }
 
