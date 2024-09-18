@@ -1,22 +1,35 @@
-import React, { ReactElement, useEffect, useReducer } from 'react';
-import { getMoveList, getPokemon } from '../../../helpers/api';
+import React, { useEffect, useReducer } from 'react';
+import styled, { css } from 'styled-components';
 
-import AttributeTable from '../../molecules/AttributeTable';
-import EmptySelectionSection from '../../atoms/EmptySelectionSection';
-import Loading from '../../atoms/Loading';
-import MoveSection from '../../molecules/MoveSection';
-import NameSection from '../../molecules/NameSection';
-import { Pokemon } from '../../../types/api';
-import Sprite from '../../atoms/Sprite';
-import StatSection from '../../molecules/StatTable';
-import StyledPanel from './styled';
 import { asyncStatus } from '../../constants';
 import useAsync from '../../hooks/useAsync';
+import { Pokemon } from '../../../types/api';
+import { getMoveList, getPokemon } from '../../../helpers/api';
 
-interface PanelProps {
-  pokemonURL: string;
-  pokemonName: string;
-}
+import EmptySelectionSection from '../../atoms/EmptySelectionSection';
+import Loading from '../../atoms/Loading';
+import Sprite from '../../atoms/Sprite';
+
+import AttributeTable from '../../molecules/AttributeTable';
+import MoveSection from '../../molecules/MoveSection';
+import NameSection from '../../molecules/NameSection';
+import StatSection from '../../molecules/StatTable';
+
+const Container = styled.section<{
+  isLoading: boolean;
+}>`
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  width: 100%;
+
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      align-items: center;
+      justify-content: center;
+    `}
+`;
 
 const EmptySection = ({ status }: { status: string }) =>
   status === asyncStatus.idle ? <EmptySelectionSection /> : null;
@@ -31,7 +44,7 @@ const PokemonData = ({ data }: { data: Pokemon | null }) =>
   data !== null ? (
     <>
       <NameSection name={data.name} />
-      <Sprite spriteImg={data.sprites} />
+      <Sprite spriteImg={data.sprites.front_default} />
       <AttributeTable types={data.types} abilities={data.abilities} />
       <StatSection statList={data.stats} />
       <MoveSection moveList={getMoveList(data.moves)} />
@@ -50,7 +63,13 @@ function cacheReducer(state: any, action: any) {
   }
 }
 
-export default function Panel({ pokemonURL, pokemonName }: PanelProps): ReactElement | null {
+export default function Panel({
+  pokemonURL,
+  pokemonName,
+}: {
+  pokemonURL: string;
+  pokemonName: string;
+}) {
   const { data, status, error, run, setState } = useAsync({
     initialState: {
       status: pokemonURL ? asyncStatus.pending : asyncStatus.idle,
@@ -74,11 +93,11 @@ export default function Panel({ pokemonURL, pokemonName }: PanelProps): ReactEle
     }
   }, [cache, pokemonName, dispatch, pokemonURL, run, setState]);
   return (
-    <StyledPanel title="Panel" isLoading={status === asyncStatus.pending}>
+    <Container title="Panel" isLoading={status === asyncStatus.pending}>
       <PokemonData data={data} />
       <LoadingPanel status={status} />
       <EmptySection status={status} />
       <ErrorPanel error={error} />
-    </StyledPanel>
+    </Container>
   );
 }

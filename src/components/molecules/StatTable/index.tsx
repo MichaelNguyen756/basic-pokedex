@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import StyledTable from '../Table';
 import Title from '../../atoms/Title';
@@ -6,18 +6,14 @@ import Title from '../../atoms/Title';
 import { PokemonStat } from '../../../types/api';
 import { formatText } from '../../../helpers';
 
-interface StatSectionProps {
-  statList: PokemonStat[];
-}
-
-function StatSection({ statList }: StatSectionProps): ReactElement {
+function StatSection({ statList }: { statList: PokemonStat[] }) {
   return (
     <section title="stat">
       <Title>Stats</Title>
       <div>
         <StyledTable striped bordered role="table">
           <tbody>
-            {statList.map(({ stat, base_stat }: PokemonStat, index: number) => (
+            {statList.map(({ stat, base_stat }: PokemonStat, index) => (
               <tr key={index}>
                 <th>{formatText(stat.name)}: </th>
                 <td>{base_stat}</td>

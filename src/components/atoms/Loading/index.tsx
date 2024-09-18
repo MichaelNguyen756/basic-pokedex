@@ -1,17 +1,19 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-import StyledLoading from './styled';
-import { LoadingProps } from './types';
+const Container = styled.div`
+  padding: 1rem;
+`;
 
-function Loading({ title = 'loading', text = '' }: LoadingProps): ReactElement {
+function Loading({ title = 'loading', text = '' }: { title: string; text?: string }) {
   return (
-    <StyledLoading>
+    <Container>
       {text}
       &nbsp;
       <FontAwesomeIcon icon={faSpinner} spin title={title} />
-    </StyledLoading>
+    </Container>
   );
 }
 

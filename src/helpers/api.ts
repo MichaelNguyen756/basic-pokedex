@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import includes from 'lodash/includes';
 
 import { isVersionGroupRedBlue } from '.';
 import {
@@ -32,7 +32,7 @@ export async function getPokemon(url: string): Promise<Pokemon> {
 
 export function getMoveList(moves: PokemonMove[]): PokemonMove[] {
   return moves.filter(({ version_group_details }: PokemonMove) =>
-    _.includes(
+    includes(
       version_group_details.map(({ move_learn_method: { name } }: PokemonMoveVersion) => name),
       'level-up',
     ),

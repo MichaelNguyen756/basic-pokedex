@@ -2,11 +2,9 @@ import styled from 'styled-components';
 
 import { borderSetting } from '../../constants';
 
-interface InfoPanelProps {
+const InfoPanel = styled.section<{
   hasSelection: boolean;
-}
-
-const InfoPanel = styled.section<InfoPanelProps>`
+}>`
   flex: 1 1 0;
   height: 100%;
   border: ${borderSetting};

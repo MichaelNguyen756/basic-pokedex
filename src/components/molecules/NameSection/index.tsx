@@ -1,17 +1,23 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
+import styled from 'styled-components';
+
 import PokemonName from '../PokemonName';
 
-import StyledNameSection from './styled';
+const StyledSection = styled.section`
+  flex: 0 0 auto;
+  font-size: 2em;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: brown;
+  position: sticky;
+  top: 0;
+`;
 
-interface NameSectionProps {
-  name: string;
-}
-
-function NameSection({ name }: NameSectionProps): ReactElement {
+function NameSection({ name }: { name: string }) {
   return (
-    <StyledNameSection title="Pokemon Name">
+    <StyledSection title="Pokemon Name">
       <PokemonName name={name} />
-    </StyledNameSection>
+    </StyledSection>
   );
 }
 
