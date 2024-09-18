@@ -25,7 +25,10 @@ export default function useAsync({ initialState = {}, reducer = asyncReducer }) 
     [dispatch],
   );
 
-  const setState = useCallback(data => dispatch({ type: asyncStatus.resolved, data }), [dispatch]);
+  const setState = useCallback(
+    (data: any) => dispatch({ type: asyncStatus.resolved, data }),
+    [dispatch],
+  );
 
   return {
     error,

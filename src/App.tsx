@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 
 import Panel from './components/organisms/Panel';
 import InfoPanel from './components/organisms/InfoPanel';
@@ -7,7 +7,7 @@ import EmptySelectionSection from './components/atoms/EmptySelectionSection';
 
 import StyledApp from './StyledApp';
 
-function App(): ReactElement {
+function App() {
   const [{ name, url }, setPokemon] = useState({ name: '', url: '' });
 
   function handleClick(url: string, name: string) {
