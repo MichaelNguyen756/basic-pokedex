@@ -16,15 +16,15 @@ import NameSection from '../../molecules/NameSection';
 import StatSection from '../../molecules/StatTable';
 
 const Container = styled.section<{
-  isLoading: boolean;
+  $isLoading: boolean;
 }>`
   display: flex;
   flex-flow: column nowrap;
   height: 100%;
   width: 100%;
 
-  ${({ isLoading }) =>
-    isLoading &&
+  ${({ $isLoading }) =>
+    $isLoading &&
     css`
       align-items: center;
       justify-content: center;
@@ -44,7 +44,7 @@ const PokemonData = ({ data }: { data: Pokemon | null }) =>
   data !== null ? (
     <>
       <NameSection name={data.name} />
-      <Sprite spriteImg={data.sprites.front_default} />
+      <Sprite spriteImg={data.sprites?.front_default} />
       <AttributeTable types={data.types} abilities={data.abilities} />
       <StatSection statList={data.stats} />
       <MoveSection moveList={getMoveList(data.moves)} />
@@ -63,13 +63,7 @@ function cacheReducer(state: any, action: any) {
   }
 }
 
-export default function Panel({
-  pokemonURL,
-  pokemonName,
-}: {
-  pokemonURL: string;
-  pokemonName: string;
-}) {
+export default function Panel({pokemonURL}: {pokemonURL: string;}) {
   const { data, status, error, run, setState } = useAsync({
     initialState: {
       status: pokemonURL ? asyncStatus.pending : asyncStatus.idle,
@@ -81,19 +75,20 @@ export default function Panel({
   useEffect(() => {
     if (!pokemonURL) {
       return;
-    } else if (cache[pokemonName]) {
-      setState(cache[pokemonName]);
+    } else if (cache[pokemonURL]) {
+      setState(cache[pokemonURL]);
     } else {
       run(
         getPokemon(pokemonURL).then(pokemonData => {
-          dispatch({ type: 'ADD_POKEMON', name: pokemonName, data: pokemonData });
+          dispatch({ type: 'ADD_POKEMON', name: pokemonURL, data: pokemonData });
           return pokemonData;
         }),
       );
     }
-  }, [cache, pokemonName, dispatch, pokemonURL, run, setState]);
+  }, [cache, dispatch, pokemonURL, run, setState]);
+
   return (
-    <Container title="Panel" isLoading={status === asyncStatus.pending}>
+    <Container title="Panel" $isLoading={status === asyncStatus.pending}>
       <PokemonData data={data} />
       <LoadingPanel status={status} />
       <EmptySection status={status} />

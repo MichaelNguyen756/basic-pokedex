@@ -1,4 +1,5 @@
 import { formatText } from '../index';
+import {test, expect} from '@jest/globals';
 
 test(`take the string "hp" and return it as full uppercase`, () => {
   expect(formatText('hp')).toBe('HP');
