@@ -14,12 +14,12 @@ function isAlternateFontColour(pokemonType: string, colourType: string) {
   );
 }
 
-const StyledContainer = styled.div<{ pokemonType: string }>`
+const StyledContainer = styled.div<{ $pokemonType: string }>`
   padding: 5px;
-  background-color: ${({ pokemonType }) =>
-    pokemonType ? typeColours[pokemonType].default : 'transparent'};
-  color: ${({ pokemonType }) =>
-    isAlternateFontColour(pokemonType, 'default') ? '#000000' : '#ffffff'};
+  background-color: ${({ $pokemonType }) =>
+    $pokemonType ? typeColours[$pokemonType].default : 'transparent'};
+  color: ${({ $pokemonType }) =>
+    isAlternateFontColour($pokemonType, 'default') ? '#000000' : '#ffffff'};
   border: ${borderSetting};
   border-radius: 20px;
   display: flex;
@@ -34,7 +34,7 @@ export type TypeIconProps = {
 };
 
 function TypeIcon({ type }: TypeIconProps) {
-  return <StyledContainer pokemonType={type}>{toUpperFirst(type)}</StyledContainer>;
+  return <StyledContainer $pokemonType={type}>{toUpperFirst(type)}</StyledContainer>;
 }
 
 export default TypeIcon;

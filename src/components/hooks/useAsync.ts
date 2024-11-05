@@ -4,7 +4,7 @@ import asyncReducer from '../../helpers/asyncReducer';
 import { asyncStatus } from '../constants';
 import useSafeDispatch from './useSafeDispatch';
 
-export default function useAsync({ initialState = {}, reducer = asyncReducer }) {
+export default function useAsync({ initialState = {}, reducer = asyncReducer } = {}) {
   const [{ data, status, error }, unsafeDispatch] = useReducer(reducer, {
     status: asyncStatus.idle,
     data: null,

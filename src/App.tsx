@@ -19,17 +19,20 @@ const StyledApp = styled.div`
 `;
 
 function App() {
-  const [{ name, url }, setPokemon] = useState({ name: '', url: '' });
+  const [pokemonUrl, setPokemonUrl] = useState('');
 
-  function handleClick(url: string, name: string) {
-    setPokemon({ name, url });
+  const hasSelection = pokemonUrl !== '';
+
+  function handleClick(url: string) {
+    setPokemonUrl(url);
   }
 
   return (
     <StyledApp>
-      <SelectionMenuSection pokemonURL={url} onClick={handleClick} />
-      <InfoPanel hasSelection={url !== ''}>
-        {url === '' ? <EmptySelectionSection /> : <Panel pokemonURL={url} pokemonName={name} />}
+      <SelectionMenuSection pokemonURL={pokemonUrl} handleClick={handleClick} 
+      />
+      <InfoPanel $hasSelection={hasSelection}>
+        {hasSelection ? <Panel pokemonURL={pokemonUrl}/> : <EmptySelectionSection />}
       </InfoPanel>
     </StyledApp>
   );

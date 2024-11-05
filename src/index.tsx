@@ -1,18 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-// if (process.env.NODE_ENV === 'development') {
-//     const { worker } = require('./__mocks__/browser');
-//     worker.start();
-// }
+async function enableMocking() {
+    if (process.env.NODE_ENV !== 'development') {
+        return
+    }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+    const { worker } = await import('./__mocks__/browser');
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    // `worker.start()` returns a Promise that resolves
+    // once the Service Worker is up and ready to intercept requests.
+    return worker.start()
+}
+
+// enableMocking().then(() => {
+    createRoot(document.getElementById('root')!).render(
+        <StrictMode>
+          <App />
+        </StrictMode>,
+      )
+// })
+

@@ -1,8 +1,8 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent, act } from '@testing-library/react';
+import { beforeAll, afterAll, afterEach, it, expect } from '@jest/globals';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { setupServer } from 'msw/node';
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 import App from '../App';
 import { PokemonAPIURL } from '../helpers/api';
@@ -93,52 +93,60 @@ const pokemonStatistics = {
 };
 
 const server = setupServer(
-  rest.get(`${PokemonAPIURL}/pokemon`, (_req, res, ctx) => {
-    return res(ctx.json(pokemonResults));
-  }),
-  rest.get(`${PokemonAPIURL}/pokemon/1/`, (_req, res, ctx) => {
-    return res(ctx.json(pokemonStatistics));
-  }),
+  http.get('*/pokemon/1', () => HttpResponse.json(pokemonStatistics)),
+  http.get('*/pokemon*', () => HttpResponse.json(pokemonResults)),
 );
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it('renders without crashing', async () => {
+  await act(() => {
+    render(<App />);
+  });
 });
 
-it('renders the initial message to select an option', () => {
-  const { getByText } = render(<App />);
-  expect(getByText(/select a Pokemon from the left-hand list/i)).toBeInTheDocument();
+it('renders the initial message to select an option', async () => {
+  await act(() => {
+    render(<App />);
+  });
+  expect(screen.getByText(/select a Pokemon from the left-hand list/i)).toBeInTheDocument();
 });
 
 it('renders the title as the pokemon name when a button is selected', async () => {
-  const { getByRole, getByTitle, getByAltText } = render(<App />);
+  await act(() => {
+    render(<App />);
+  });
 
-  expect(getByTitle(/loading menu/i)).toBeInTheDocument();
+  expect(
+    screen.getByRole('heading', { name: 'Select a Pokemon from the left-hand list' }),
+  ).toBeInTheDocument();
 
   //  Check that the selection menu is loaded
   await waitFor(() => screen.getAllByRole('button'));
-  fireEvent.click(getByRole('button', { name: new RegExp(pokemonResults.results[0].name, 'i') }));
+  fireEvent.click(
+    screen.getByRole('button', { name: new RegExp(pokemonResults.results[0].name, 'i') }),
+  );
+
+  expect(screen.getByTitle(/loading menu/i)).toBeInTheDocument();
 
   //  Check for the Pokemon title
   await waitFor(() =>
-    expect(getByTitle(/pokemon name/i)).toHaveTextContent(new RegExp(pokemonStatistics.name, 'i')),
+    expect(screen.getByTitle(/pokemon name/i)).toHaveTextContent(
+      new RegExp(pokemonStatistics.name, 'i'),
+    ),
   );
 
   //  Check that the Sprite is there
-  expect(getByAltText(/sprite/i)).toBeInTheDocument();
+  expect(screen.getByAltText(/sprite/i)).toBeInTheDocument();
 
   //  Check for the attributes section
-  expect(getByTitle(/attributes/i)).toBeInTheDocument();
+  expect(screen.getByTitle(/attributes/i)).toBeInTheDocument();
 
   //  Check for the stat section
-  expect(getByTitle(/stat/i)).toBeInTheDocument();
+  expect(screen.getByTitle(/stat/i)).toBeInTheDocument();
 
   //  Check for the moves section
-  expect(getByTitle(/moves/i)).toBeInTheDocument();
+  expect(screen.getByTitle(/moves/i)).toBeInTheDocument();
 });
