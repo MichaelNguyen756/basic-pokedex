@@ -6,21 +6,9 @@ import MoveRow from '../../atoms/MoveRow';
 import { filterMoveList } from '../../../helpers/api';
 import { PokemonMove, MoveAttribute } from '../../../types/api';
 
-function sortLevelAt(a: MoveAttribute, b: MoveAttribute) {
-  if (!a.levelAt) {
-    return -1;
-  }
-
-  if (!b.levelAt) {
-    return 1;
-  }
-
-  return a?.levelAt - b?.levelAt;
-}
-
 function renderMoveRows(moveList: PokemonMove[]) {
   return filterMoveList(moveList)
-    .toSorted(sortLevelAt)
+    .toSorted((a, b) => (a.levelAt || 0) - (b.levelAt || 0))
     .map(({ levelAt, moveName }: MoveAttribute, index: number) => (
       <MoveRow
         className={index % 2 === 1 ? 'bg-gray-200' : 'bg-white'}
