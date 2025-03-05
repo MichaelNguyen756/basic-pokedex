@@ -24,7 +24,7 @@ export const handlers = [
       ],
     });
   }),
-  http.get(`*/pokemon/1/`, () => {
+  http.get(`*/pokemon/1`, () => {
     return HttpResponse.json({
       abilities: [
         {
