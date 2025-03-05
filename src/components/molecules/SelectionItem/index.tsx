@@ -26,12 +26,10 @@ const StyledButton = styled.button<{
   }
 `;
 
-function SelectionItem({ onClick, isSelected, children }: SelectionItemProps) {
+export default function SelectionItem({ onClick, isSelected, children }: SelectionItemProps) {
   return (
     <StyledButton $isSelected={isSelected} onClick={onClick}>
       {children}
     </StyledButton>
   );
 }
-
-export default SelectionItem;

@@ -5,7 +5,7 @@ import MoveTable from '../MoveTable';
 
 import { PokemonMove } from '../../../types/api';
 
-function MoveSection({ moveList }: { moveList: PokemonMove[] }) {
+export default function MoveSection({ moveList }: { moveList: PokemonMove[] }) {
   return (
     <section title="moves">
       <Title>Moves</Title>
@@ -13,5 +13,3 @@ function MoveSection({ moveList }: { moveList: PokemonMove[] }) {
     </section>
   );
 }
-
-export default MoveSection;

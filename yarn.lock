@@ -3517,13 +3517,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.17.16":
-  version: 4.17.16
-  resolution: "@types/lodash@npm:4.17.16"
-  checksum: 10c0/cf017901b8ab1d7aabc86d5189d9288f4f99f19a75caf020c0e2c77b8d4cead4db0d0b842d009b029339f92399f49f34377dd7c2721053388f251778b4c23534
-  languageName: node
-  linkType: hard
-
 "@types/mdx@npm:^2.0.0":
   version: 2.0.13
   resolution: "@types/mdx@npm:2.0.13"
@@ -4474,7 +4467,6 @@ __metadata:
     "@testing-library/react": "npm:^16.2.0"
     "@types/babel__preset-env": "npm:^7.10.0"
     "@types/bootstrap": "npm:^5.2.10"
-    "@types/lodash": "npm:^4.17.16"
     "@types/react": "npm:^19.0.10"
     "@types/react-dom": "npm:^19.0.4"
     "@vitest/browser": "npm:^3.0.7"
@@ -4488,7 +4480,6 @@ __metadata:
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
     jest-fixed-jsdom: "npm:^0.0.9"
-    lodash: "npm:^4.17.21"
     msw: "npm:^2.7.3"
     playwright: "npm:^1.50.1"
     prettier: "npm:^3.5.3"

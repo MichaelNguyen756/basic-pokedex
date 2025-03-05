@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatText } from '../../../helpers';
 
-function MoveRow({
+export default function MoveRow({
   levelLearntNumber,
   moveName,
 }: {
@@ -15,5 +15,3 @@ function MoveRow({
     </tr>
   );
 }
-
-export default MoveRow;

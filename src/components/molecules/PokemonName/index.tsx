@@ -12,7 +12,7 @@ function isGenderSymbolMale(symbol: string) {
   return symbol === 'm';
 }
 
-function PokemonName({ name }: PokemonNameProps) {
+export default function PokemonName({ name }: PokemonNameProps) {
   if (name.match(/nidoran/i)) {
     const [initialName, genderSymbol] = name.split('-');
     return (
@@ -33,5 +33,3 @@ function PokemonName({ name }: PokemonNameProps) {
     return <>{toUpperFirst(name)}</>;
   }
 }
-
-export default PokemonName;

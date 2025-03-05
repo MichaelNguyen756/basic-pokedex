@@ -22,7 +22,7 @@ const StyledApp = styled.div`
 
 const queryClient = new QueryClient();
 
-function App() {
+export default function App() {
   const [pokemonUrl, setPokemonUrl] = useState('');
 
   const hasSelection = pokemonUrl !== '';
@@ -42,5 +42,3 @@ function App() {
     </QueryClientProvider>
   );
 }
-
-export default App;

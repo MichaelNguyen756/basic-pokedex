@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-function InfoRow({ rowTitle, children }: { rowTitle: string; children: ReactNode }) {
+export default function InfoRow({ rowTitle, children }: { rowTitle: string; children: ReactNode }) {
   return (
     <tr>
       <th>{rowTitle}</th>
@@ -8,5 +8,3 @@ function InfoRow({ rowTitle, children }: { rowTitle: string; children: ReactNode
     </tr>
   );
 }
-
-export default InfoRow;

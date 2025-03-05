@@ -4,10 +4,10 @@ import InfoRow from '../InfoRow';
 import StyledTable from '../Table';
 
 import { getAbilities } from '../../../helpers/api';
-import { PokemonType, PokemonAbility } from '../../../types/api';
+import type { PokemonType, PokemonAbility } from '../../../types/api';
 import TypeGroup from '../TypeGroup';
 
-function AttributeTable({
+export default function AttributeTable({
   types,
   abilities,
 }: {
@@ -27,5 +27,3 @@ function AttributeTable({
     </section>
   );
 }
-
-export default AttributeTable;

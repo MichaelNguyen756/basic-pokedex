@@ -6,7 +6,7 @@ import Title from '../../atoms/Title';
 import { PokemonStat } from '../../../types/api';
 import { formatText } from '../../../helpers';
 
-function StatSection({ statList }: { statList: PokemonStat[] }) {
+export default function StatSection({ statList }: { statList: PokemonStat[] }) {
   return (
     <section title="stat">
       <Title>Stats</Title>
@@ -25,5 +25,3 @@ function StatSection({ statList }: { statList: PokemonStat[] }) {
     </section>
   );
 }
-
-export default StatSection;

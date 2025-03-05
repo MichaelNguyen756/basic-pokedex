@@ -6,12 +6,10 @@ const SpriteImage = styled.img`
   width: 30%;
 `;
 
-function Sprite({ spriteImg }: { spriteImg: string }) {
+export default function Sprite({ spriteImg }: { spriteImg: string }) {
   return (
     <div title="Sprite">
       <SpriteImage src={spriteImg} alt="sprite" />
     </div>
   );
 }
-
-export default Sprite;

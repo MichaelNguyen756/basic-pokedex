@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-function TypeGroup({ types }: { types: PokemonType[] }) {
+export default function TypeGroup({ types }: { types: PokemonType[] }) {
   return (
     <Container>
       {types.map(({ type: { name } }, index) => (
@@ -20,5 +20,3 @@ function TypeGroup({ types }: { types: PokemonType[] }) {
     </Container>
   );
 }
-
-export default TypeGroup;

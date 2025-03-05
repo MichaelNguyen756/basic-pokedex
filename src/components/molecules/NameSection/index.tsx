@@ -13,12 +13,10 @@ const StyledSection = styled.section`
   top: 0;
 `;
 
-function NameSection({ name }: { name: string }) {
+export default function NameSection({ name }: { name: string }) {
   return (
     <StyledSection title="Pokemon Name">
       <PokemonName name={name} />
     </StyledSection>
   );
 }
-
-export default NameSection;

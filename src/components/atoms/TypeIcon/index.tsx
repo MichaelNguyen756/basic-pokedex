@@ -29,12 +29,10 @@ const StyledContainer = styled.div<{ $pokemonType: string }>`
   font-weight: bold;
 `;
 
-export type TypeIconProps = {
+type TypeIconProps = {
   type: string;
 };
 
-function TypeIcon({ type }: TypeIconProps) {
+export default function TypeIcon({ type }: TypeIconProps) {
   return <StyledContainer $pokemonType={type}>{toUpperFirst(type)}</StyledContainer>;
 }
-
-export default TypeIcon;

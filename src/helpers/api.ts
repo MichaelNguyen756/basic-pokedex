@@ -1,6 +1,3 @@
-import _ from 'lodash';
-
-import { isVersionGroupRedBlue } from '.';
 import {
   PokemonAPIResourceList,
   PokemonAbility,
@@ -8,7 +5,8 @@ import {
   MoveAttribute,
   Pokemon,
 } from '../types/api';
-import { formatText } from './index';
+
+import { formatText, isVersionGroupRedBlue } from '.';
 
 export const PokemonAPIURL: string = 'https://pokeapi.co/api/v2';
 
@@ -30,24 +28,26 @@ export async function getPokemon(url: string): Promise<Pokemon> {
 }
 
 export function getMoveList(moves: PokemonMove[]) {
-  return moves.filter(({ version_group_details }: PokemonMove) =>
-    _.includes(
-      version_group_details.map(({ move_learn_method: { name } }) => name),
-      'level-up',
-    ),
+  return moves.filter(({ version_group_details }) =>
+    version_group_details
+      .map(({ move_learn_method }) => move_learn_method.name)
+      .includes('level-up'),
   );
 }
 
-export function filterMoveList(moveList: PokemonMove[]): MoveAttribute[] {
+export function filterMoveList(moveList: PokemonMove[]) {
   return moveList
     .filter(
       ({ version_group_details }) =>
         version_group_details.find(isVersionGroupRedBlue) !== undefined,
     )
-    .map(({ version_group_details, move }) => ({
-      levelAt: version_group_details.find(isVersionGroupRedBlue)?.level_learned_at,
-      moveName: move.name,
-    }));
+    .map(
+      ({ version_group_details, move }) =>
+        ({
+          levelAt: version_group_details.find(isVersionGroupRedBlue)?.level_learned_at,
+          moveName: move.name,
+        }) as MoveAttribute,
+    );
 }
 
 export function getCommaSeparatedString<T>(

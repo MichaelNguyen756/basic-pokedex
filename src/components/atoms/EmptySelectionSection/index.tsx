@@ -10,12 +10,10 @@ const StyledSection = styled.section`
   justify-content: center;
 `;
 
-function EmptySelectionSection() {
+export default function EmptySelectionSection() {
   return (
     <StyledSection>
       <h1>Select a Pokemon from the left-hand list</h1>
     </StyledSection>
   );
 }
-
-export default EmptySelectionSection;

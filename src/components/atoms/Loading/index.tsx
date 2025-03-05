@@ -7,7 +7,7 @@ const Container = styled.div`
   padding: 1rem;
 `;
 
-function Loading({ title = 'loading', text = '' }: { title: string; text?: string }) {
+export default function Loading({ title = 'loading', text = '' }) {
   return (
     <Container>
       {text}
@@ -16,5 +16,3 @@ function Loading({ title = 'loading', text = '' }: { title: string; text?: strin
     </Container>
   );
 }
-
-export default Loading;
