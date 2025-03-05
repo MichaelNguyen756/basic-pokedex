@@ -1,25 +1,30 @@
-import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { Story, Meta } from '@storybook/react/types-6-0';
-
-import SelectionItem, { SelectionItemProps } from '.';
+import SelectionItem from '.';
 
 export default {
   component: SelectionItem,
   title: 'Molecules/Selection Item',
-  argTypes: { onClick: { action: 'clicked' } },
-} as Meta;
+  argTypes: {
+    onClick: {
+      action: 'clicked',
+    },
+  },
+  args: {},
+} as Meta<typeof SelectionItem>;
 
-const Template: Story<SelectionItemProps> = args => <SelectionItem {...args} />;
+type Story = StoryObj<typeof SelectionItem>;
 
-export const Default = Template.bind({});
-Default.args = {
-  children: <>Default</>,
-  isSelected: false,
+export const Default: Story = {
+  args: {
+    children: 'Default',
+    isSelected: false,
+  },
 };
 
-export const Selected = Template.bind({});
-Selected.args = {
-  children: <>Selected</>,
-  isSelected: true,
+export const Selected: Story = {
+  args: {
+    children: 'Selected',
+    isSelected: true,
+  },
 };

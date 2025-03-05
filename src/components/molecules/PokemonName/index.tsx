@@ -4,9 +4,9 @@ import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
 
 import { toUpperFirst } from '../../../helpers';
 
-export interface PokemonNameProps {
+export type PokemonNameProps = {
   name: string;
-}
+};
 
 function isGenderSymbolMale(symbol: string) {
   return symbol === 'm';

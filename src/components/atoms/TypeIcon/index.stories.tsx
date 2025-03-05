@@ -1,119 +1,75 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import TypeIcon, { TypeIconProps } from '.';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import React from 'react';
+import { POKEMON_TYPES } from '../../constants';
+
+import TypeIcon from '.';
 
 export default {
   component: TypeIcon,
   title: 'Atoms/Type Icon',
-  decorators: [
-    story => (
-      <div
-        style={{
-          padding: '3rem',
-          width: '150px',
-          height: '50px',
-        }}
-      >
-        {story()}
-      </div>
-    ),
-  ],
-} as Meta;
+  argTypes: {
+    type: {
+      control: 'radio',
+      options: Object.values(POKEMON_TYPES),
+    },
+  },
+  args: {
+    type: POKEMON_TYPES.BUG,
+  },
+} as Meta<typeof TypeIcon>;
 
-const Template: Story<TypeIconProps> = args => <TypeIcon {...args} />;
+type Story = StoryObj<typeof TypeIcon>;
 
-export const Default = Template.bind({});
-Default.args = {
-  type: '',
+export const Bug: Story = {
+  args: {
+    type: POKEMON_TYPES.BUG,
+  },
 };
 
-export const Bug = Template.bind({});
-Bug.args = {
-  type: 'bug',
+export const Dark: Story = {
+  args: {
+    type: POKEMON_TYPES.DARK,
+  },
 };
 
-export const Dark = Template.bind({});
-Dark.args = {
-  type: 'dark',
+export const Dragon: Story = {
+  args: {
+    type: POKEMON_TYPES.DRAGON,
+  },
 };
 
-export const Dragon = Template.bind({});
-Dragon.args = {
-  type: 'dragon',
+export const Electric: Story = {
+  args: {
+    type: POKEMON_TYPES.ELECTRIC,
+  },
 };
 
-export const Electric = Template.bind({});
-Electric.args = {
-  type: 'electric',
+export const Fairy: Story = {
+  args: {
+    type: POKEMON_TYPES.FAIRY,
+  },
 };
 
-export const Fairy = Template.bind({});
-Fairy.args = {
-  type: 'fairy',
+export const Fighting: Story = {
+  args: {
+    type: POKEMON_TYPES.FIGHTING,
+  },
 };
 
-export const Fighting = Template.bind({});
-Fighting.args = {
-  type: 'fighting',
+export const Fire: Story = {
+  args: {
+    type: POKEMON_TYPES.FIRE,
+  },
 };
 
-export const Fire = Template.bind({});
-Fire.args = {
-  type: 'fire',
+export const Flying: Story = {
+  args: {
+    type: POKEMON_TYPES.FLYING,
+  },
 };
 
-export const Flying = Template.bind({});
-Flying.args = {
-  type: 'flying',
-};
-
-export const Ghost = Template.bind({});
-Ghost.args = {
-  type: 'ghost',
-};
-
-export const Grass = Template.bind({});
-Grass.args = {
-  type: 'grass',
-};
-
-export const Ground = Template.bind({});
-Ground.args = {
-  type: 'ground',
-};
-
-export const Ice = Template.bind({});
-Ice.args = {
-  type: 'ice',
-};
-
-export const Normal = Template.bind({});
-Normal.args = {
-  type: 'normal',
-};
-
-export const Poison = Template.bind({});
-Poison.args = {
-  type: 'poison',
-};
-
-export const Psychic = Template.bind({});
-Psychic.args = {
-  type: 'psychic',
-};
-
-export const Rock = Template.bind({});
-Rock.args = {
-  type: 'rock',
-};
-
-export const Steel = Template.bind({});
-Steel.args = {
-  type: 'steel',
-};
-
-export const Water = Template.bind({});
-Water.args = {
-  type: 'water',
+export const Normal: Story = {
+  args: {
+    type: 'normal',
+  },
 };

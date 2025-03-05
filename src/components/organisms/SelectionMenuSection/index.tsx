@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 import { PokemonAPIResource } from '../../../types/api';
@@ -11,10 +11,10 @@ import { asyncStatus } from '../../constants';
 import { getPokemonURL } from '../../../helpers/api';
 import useAsync from '../../hooks/useAsync';
 
-export interface SelectionMenuSectionProps extends ComponentPropsWithoutRef<'section'> {
+export type SelectionMenuSectionProps = {
   pokemonURL: string;
   handleClick: (url: string, name: string) => void;
-}
+};
 
 const Container = styled.div<{
   $isLoading: boolean;
@@ -46,7 +46,10 @@ const StyledSelectionItem = styled(SelectionItem)`
 const LoadMenu = ({ status }: { status: string }) =>
   status === asyncStatus.pending ? <Loading title="loading menu" /> : null;
 
-export default function SelectionMenuSection({ pokemonURL, handleClick, className, ...rest }: SelectionMenuSectionProps) {
+export default function SelectionMenuSection({
+  pokemonURL,
+  handleClick,
+}: SelectionMenuSectionProps) {
   const { data: menu, run, status } = useAsync();
 
   useEffect(() => {
@@ -54,7 +57,7 @@ export default function SelectionMenuSection({ pokemonURL, handleClick, classNam
   }, [run]);
 
   return (
-    <Container {...rest} $isLoading={status === asyncStatus.pending}>
+    <Container $isLoading={status === asyncStatus.pending}>
       {status === asyncStatus.resolved &&
         menu.results.map(({ url, name }: PokemonAPIResource) => (
           <StyledSelectionItem

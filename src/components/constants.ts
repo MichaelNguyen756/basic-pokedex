@@ -2,6 +2,29 @@ import { pokemonTypeColours } from '../types/index';
 
 export const borderSetting = '1px solid #000000';
 
+export const POKEMON_TYPES = {
+  NORMAL: 'normal',
+  FIGHTING: 'fighting',
+  FLYING: 'flying',
+  POISON: 'poison',
+  GROUND: 'ground',
+  ROCK: 'rock',
+  BUG: 'bug',
+  GHOST: 'ghost',
+  STEEL: 'steel',
+  FIRE: 'fire',
+  WATER: 'water',
+  GRASS: 'grass',
+  ELECTRIC: 'electric',
+  PSYCHIC: 'psychic',
+  ICE: 'ice',
+  DRAGON: 'dragon',
+  DARK: 'dark',
+  FAIRY: 'fairy',
+  STELLAR: 'stellar',
+  UNKNOWN: 'unknown',
+};
+
 export const typeColours: pokemonTypeColours = {
   bug: {
     light: '#C6D16E',

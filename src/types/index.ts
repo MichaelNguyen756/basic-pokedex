@@ -1,9 +1,9 @@
-export interface colourTypes {
+export type colourTypes = {
   default: string;
   light: string;
   dark: string;
-}
+};
 
-export interface pokemonTypeColours {
+export type pokemonTypeColours = {
   [pokemonType: string]: colourTypes;
-}
+};

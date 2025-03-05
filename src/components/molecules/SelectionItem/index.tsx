@@ -1,12 +1,12 @@
-import React, { ComponentPropsWithoutRef, MouseEventHandler, ReactNode } from 'react';
+import React from 'react';
+import type { MouseEventHandler, ReactNode } from 'react';
 import styled from 'styled-components';
 
-export interface SelectionItemProps extends ComponentPropsWithoutRef<'button'> {
+export type SelectionItemProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   isSelected?: boolean;
-  buttonText?: ReactNode;
   children?: ReactNode;
-}
+};
 
 const StyledButton = styled.button<{
   $isSelected?: boolean;

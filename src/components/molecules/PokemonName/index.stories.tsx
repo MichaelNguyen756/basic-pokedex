@@ -1,31 +1,34 @@
-import React from 'react';
-import { Story, Meta } from '@storybook/react/types-6-0';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import PokemonName, { PokemonNameProps } from '.';
+import PokemonName from '.';
 
 export default {
   component: PokemonName,
   title: 'Molecules/Pokemon Name',
-} as Meta;
+} as Meta<typeof PokemonName>;
 
-const Template: Story<PokemonNameProps> = args => <PokemonName {...args} />;
+type Story = StoryObj<typeof PokemonName>;
 
-export const Default = Template.bind({});
-Default.args = {
-  name: 'pikachu',
+export const Default: Story = {
+  args: {
+    name: 'pikachu',
+  },
 };
 
-export const NidoranMale = Template.bind({});
-NidoranMale.args = {
-  name: 'nidoran-m',
+export const NidoranMale: Story = {
+  args: {
+    name: 'nidoran-m',
+  },
 };
 
-export const NidoranFemale = Template.bind({});
-NidoranFemale.args = {
-  name: 'nidoran-f',
+export const NidoranFemale: Story = {
+  args: {
+    name: 'nidoran-f',
+  },
 };
 
-export const MrMime = Template.bind({});
-MrMime.args = {
-  name: 'mr-mime',
+export const MrMime: Story = {
+  args: {
+    name: 'mr-mime',
+  },
 };
