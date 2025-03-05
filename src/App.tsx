@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -37,6 +38,7 @@ function App() {
           {hasSelection ? <Panel pokemonURL={pokemonUrl} /> : <EmptySelectionSection />}
         </InfoPanel>
       </StyledApp>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

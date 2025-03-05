@@ -29,7 +29,7 @@ export async function getPokemon(url: string): Promise<Pokemon> {
   return await GetPokemonJSONFromAPI(url);
 }
 
-export function getMoveList(moves: PokemonMove[]): PokemonMove[] {
+export function getMoveList(moves: PokemonMove[]) {
   return moves.filter(({ version_group_details }: PokemonMove) =>
     _.includes(
       version_group_details.map(({ move_learn_method: { name } }) => name),
