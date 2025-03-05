@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { toUpperFirst } from '../../../helpers';
-import { borderSetting, typeColours } from '../../constants';
+import { BORDER_SETTING, TYPE_COLOURS } from '../../constants';
 
 function isAlternateFontColour(pokemonType: string, colourType: string) {
   return (
@@ -17,10 +17,10 @@ function isAlternateFontColour(pokemonType: string, colourType: string) {
 const StyledContainer = styled.div<{ $pokemonType: string }>`
   padding: 5px;
   background-color: ${({ $pokemonType }) =>
-    $pokemonType ? typeColours[$pokemonType].default : 'transparent'};
+    $pokemonType ? TYPE_COLOURS[$pokemonType].default : 'transparent'};
   color: ${({ $pokemonType }) =>
     isAlternateFontColour($pokemonType, 'default') ? '#000000' : '#ffffff'};
-  border: ${borderSetting};
+  border: ${BORDER_SETTING};
   border-radius: 20px;
   display: flex;
   align-items: center;

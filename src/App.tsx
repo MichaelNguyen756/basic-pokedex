@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -18,23 +19,25 @@ const StyledApp = styled.div`
   box-sizing: border-box;
 `;
 
+const queryClient = new QueryClient();
+
 function App() {
   const [pokemonUrl, setPokemonUrl] = useState('');
 
   const hasSelection = pokemonUrl !== '';
 
-  function handleClick(url: string) {
-    setPokemonUrl(url);
-  }
-
   return (
-    <StyledApp>
-      <SelectionMenuSection pokemonURL={pokemonUrl} handleClick={handleClick} 
-      />
-      <InfoPanel $hasSelection={hasSelection}>
-        {hasSelection ? <Panel pokemonURL={pokemonUrl}/> : <EmptySelectionSection />}
-      </InfoPanel>
-    </StyledApp>
+    <QueryClientProvider client={queryClient}>
+      <StyledApp>
+        <SelectionMenuSection
+          pokemonURL={pokemonUrl}
+          handleClick={(url: string) => setPokemonUrl(url)}
+        />
+        <InfoPanel $hasSelection={hasSelection}>
+          {hasSelection ? <Panel pokemonURL={pokemonUrl} /> : <EmptySelectionSection />}
+        </InfoPanel>
+      </StyledApp>
+    </QueryClientProvider>
   );
 }
 

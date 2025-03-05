@@ -5,7 +5,6 @@ import {
   PokemonAPIResourceList,
   PokemonAbility,
   PokemonMove,
-  PokemonMoveVersion,
   MoveAttribute,
   Pokemon,
 } from '../types/api';
@@ -33,7 +32,7 @@ export async function getPokemon(url: string): Promise<Pokemon> {
 export function getMoveList(moves: PokemonMove[]): PokemonMove[] {
   return moves.filter(({ version_group_details }: PokemonMove) =>
     _.includes(
-      version_group_details.map(({ move_learn_method: { name } }: PokemonMoveVersion) => name),
+      version_group_details.map(({ move_learn_method: { name } }) => name),
       'level-up',
     ),
   );
@@ -42,10 +41,10 @@ export function getMoveList(moves: PokemonMove[]): PokemonMove[] {
 export function filterMoveList(moveList: PokemonMove[]): MoveAttribute[] {
   return moveList
     .filter(
-      ({ version_group_details }: PokemonMove) =>
+      ({ version_group_details }) =>
         version_group_details.find(isVersionGroupRedBlue) !== undefined,
     )
-    .map(({ version_group_details, move }: PokemonMove) => ({
+    .map(({ version_group_details, move }) => ({
       levelAt: version_group_details.find(isVersionGroupRedBlue)?.level_learned_at,
       moveName: move.name,
     }));

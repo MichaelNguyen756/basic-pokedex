@@ -1,64 +1,64 @@
 // This is to match the Pokemon API documentation
-export interface NamedAPIResource {
+export type NamedAPIResource = {
   name: string;
   url: string;
-}
+};
 
-export interface NamedAPIResourceList {
+export type NamedAPIResourceList = {
   count: number;
   next: string;
   previous: boolean;
   results: NamedAPIResource[];
-}
+};
 
-export interface PokemonSprites {
+export type PokemonSprites = {
   front_default: string;
-}
+};
 
-export interface VersionGameIndex {
+export type VersionGameIndex = {
   game_index: number;
   version: VersionAPIResource;
-}
+};
 
-export interface PokemonHeldItemVersion {
+export type PokemonHeldItemVersion = {
   rarity: number;
   version: VersionAPIResource;
-}
+};
 
-export interface PokemonHeldItem {
+export type PokemonHeldItem = {
   item: ItemAPIResource;
   version_details: PokemonHeldItemVersion;
-}
+};
 
-export interface PokemonMoveVersion {
+export type PokemonMoveVersion = {
   level_learned_at: number;
   move_learn_method: MoveLearnMethodAPIResource;
   version_group: VersionGroupAPIResource;
-}
+};
 
-export interface PokemonMove {
+export type PokemonMove = {
   move: PokemonMoveAPIResource;
   version_group_details: PokemonMoveVersion[];
-}
+};
 
-export interface PokemonStat {
+export type PokemonStat = {
   effort: number;
   base_stat: number;
   stat: PokemonStatAPIResource;
-}
+};
 
-export interface PokemonType {
+export type PokemonType = {
   slot: number;
   type: TypeAPIResource;
-}
+};
 
-export interface PokemonAbility {
+export type PokemonAbility = {
   ability: AbilityAPIResource;
   is_hidden: boolean;
   slot: number;
-}
+};
 
-export interface Pokemon {
+export type Pokemon = {
   abilities: PokemonAbility[];
   base_experience: number;
   forms: PokemonFormAPIResource[];
@@ -76,12 +76,12 @@ export interface Pokemon {
   stats: PokemonStat[];
   types: PokemonType[];
   weight: number;
-}
+};
 
-export interface MoveAttribute {
+export type MoveAttribute = {
   levelAt: number | undefined;
   moveName: string;
-}
+};
 
 export type AbilityAPIResource = NamedAPIResource;
 export type PokemonAPIResource = NamedAPIResource;

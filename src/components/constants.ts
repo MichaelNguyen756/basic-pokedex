@@ -1,6 +1,14 @@
-import { pokemonTypeColours } from '../types/index';
+type colourTypes = {
+  default: string;
+  light: string;
+  dark: string;
+};
 
-export const borderSetting = '1px solid #000000';
+type pokemonTypeColours = {
+  [pokemonType: string]: colourTypes;
+};
+
+export const BORDER_SETTING = '1px solid #000000';
 
 export const POKEMON_TYPES = {
   NORMAL: 'normal',
@@ -25,7 +33,7 @@ export const POKEMON_TYPES = {
   UNKNOWN: 'unknown',
 };
 
-export const typeColours: pokemonTypeColours = {
+export const TYPE_COLOURS: pokemonTypeColours = {
   bug: {
     light: '#C6D16E',
     default: '#A8B820',
@@ -116,11 +124,4 @@ export const typeColours: pokemonTypeColours = {
     default: '#6890F0',
     dark: '#445E9C',
   },
-};
-
-export const asyncStatus = {
-  idle: 'idle',
-  pending: 'pending',
-  resolved: 'resolved',
-  rejected: 'rejected',
 };

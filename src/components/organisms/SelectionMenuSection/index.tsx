@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import type { QueryStatus } from '@tanstack/react-query';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { PokemonAPIResource } from '../../../types/api';
@@ -7,9 +9,7 @@ import Loading from '../../atoms/Loading';
 import PokemonName from '../../molecules/PokemonName';
 import SelectionItem from '../../molecules/SelectionItem';
 
-import { asyncStatus } from '../../constants';
 import { getPokemonURL } from '../../../helpers/api';
-import useAsync from '../../hooks/useAsync';
 
 export type SelectionMenuSectionProps = {
   pokemonURL: string;
@@ -43,23 +43,19 @@ const StyledSelectionItem = styled(SelectionItem)`
   }
 `;
 
-const LoadMenu = ({ status }: { status: string }) =>
-  status === asyncStatus.pending ? <Loading title="loading menu" /> : null;
+const LoadMenu = ({ status }: { status: QueryStatus }) =>
+  status === 'pending' ? <Loading title="loading menu" /> : null;
 
 export default function SelectionMenuSection({
   pokemonURL,
   handleClick,
 }: SelectionMenuSectionProps) {
-  const { data: menu, run, status } = useAsync();
-
-  useEffect(() => {
-    return run(getPokemonURL());
-  }, [run]);
+  const { status, data: menu } = useQuery({ queryKey: ['pokemon'], queryFn: getPokemonURL });
 
   return (
-    <Container $isLoading={status === asyncStatus.pending}>
-      {status === asyncStatus.resolved &&
-        menu.results.map(({ url, name }: PokemonAPIResource) => (
+    <Container $isLoading={status === 'pending'}>
+      {status === 'success' &&
+        menu?.results.map(({ url, name }: PokemonAPIResource) => (
           <StyledSelectionItem
             isSelected={pokemonURL === url}
             key={name}

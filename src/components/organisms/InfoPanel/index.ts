@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-import { borderSetting } from '../../constants';
+import { BORDER_SETTING } from '../../constants';
 
 const InfoPanel = styled.section<{
   $hasSelection: boolean;
 }>`
   flex: 1 1 0;
   height: 100%;
-  border: ${borderSetting};
+  border: ${BORDER_SETTING};
   overflow-y: ${({ $hasSelection }) => ($hasSelection ? 'scroll' : 'hidden')};
 `;
 
