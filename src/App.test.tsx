@@ -4,8 +4,8 @@ import React from 'react';
 import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
 
-import App from '../App';
-import { PokemonAPIURL } from '../helpers/api';
+import App from './App';
+import { PokemonAPIURL } from './helpers/api';
 
 const pokemonResults = {
   count: 3,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import SelectionMenuSection, { SelectionMenuSectionProps } from '.';
-import * as SelectionItemStories from '../../molecules/SelectionItem/SelectionItem.stories';
+import * as SelectionItemStories from '../../molecules/SelectionItem/index.stories';
 
 export default {
   component: SelectionMenuSection,
