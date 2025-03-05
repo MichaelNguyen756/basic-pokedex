@@ -16,9 +16,9 @@ export default function AttributeTable({
 }) {
   return (
     <section title="attributes">
-      <StyledTable striped bordered>
+      <StyledTable>
         <tbody>
-          <InfoRow rowTitle="Type">
+          <InfoRow className="bg-gray-200" rowTitle="Type">
             <TypeGroup types={types} />
           </InfoRow>
           <InfoRow rowTitle="Abilities">{getAbilities(abilities)}</InfoRow>

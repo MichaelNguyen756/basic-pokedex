@@ -2,16 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { toUpperFirst } from '../../../helpers';
-import { BORDER_SETTING, TYPE_COLOURS } from '../../constants';
+import { BORDER_SETTING, POKEMON_TYPES, TYPE_COLOURS } from '../../constants';
+
+const ALTERNATE_FONT_COLOUR_TYPES = new Set([
+  POKEMON_TYPES.ELECTRIC,
+  POKEMON_TYPES.GROUND,
+  POKEMON_TYPES.ICE,
+  POKEMON_TYPES.STEEL,
+]);
 
 function isAlternateFontColour(pokemonType: string, colourType: string) {
-  return (
-    (pokemonType === 'electric' ||
-      pokemonType === 'ground' ||
-      pokemonType === 'ice' ||
-      pokemonType === 'steel') &&
-    colourType === 'light'
-  );
+  return ALTERNATE_FONT_COLOUR_TYPES.has(pokemonType) && colourType === 'light';
 }
 
 const StyledContainer = styled.div<{ $pokemonType: string }>`
@@ -29,10 +30,6 @@ const StyledContainer = styled.div<{ $pokemonType: string }>`
   font-weight: bold;
 `;
 
-type TypeIconProps = {
-  type: string;
-};
-
-export default function TypeIcon({ type }: TypeIconProps) {
+export default function TypeIcon({ type }: { type: string }) {
   return <StyledContainer $pokemonType={type}>{toUpperFirst(type)}</StyledContainer>;
 }

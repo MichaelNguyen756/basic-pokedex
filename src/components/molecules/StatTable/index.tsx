@@ -11,12 +11,12 @@ export default function StatSection({ statList }: { statList: PokemonStat[] }) {
     <section title="stat">
       <Title>Stats</Title>
       <div>
-        <StyledTable striped bordered role="table">
+        <StyledTable>
           <tbody>
             {statList.map(({ stat, base_stat }: PokemonStat, index) => (
-              <tr key={index}>
-                <th>{formatText(stat.name)}: </th>
-                <td>{base_stat}</td>
+              <tr className={index % 2 === 0 ? 'bg-gray-200' : 'bg-white'} key={index}>
+                <th className="p-2">{formatText(stat.name)}: </th>
+                <td className="p-2">{base_stat}</td>
               </tr>
             ))}
           </tbody>
