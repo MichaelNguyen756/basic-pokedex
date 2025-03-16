@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Title from '../../atoms/Title';
+import Title from '../../atoms/title';
 
 import { PokemonStat } from '../../../types/api';
 import { formatText } from '../../../helpers';
-import InfoRow from '../InfoRow';
-import DescriptionList from '../../atoms/DescriptionList';
+import InfoRow from '../info-row';
+import DescriptionList from '../../atoms/description-list';
 
 export default function StatSection({ statList }: { statList: PokemonStat[] }) {
   return (

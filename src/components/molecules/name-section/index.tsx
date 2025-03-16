@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PokemonName from '../PokemonName';
+import PokemonName from '../pokemon-name';
 
 export default function NameSection({ name }: { name: string }) {
   return (

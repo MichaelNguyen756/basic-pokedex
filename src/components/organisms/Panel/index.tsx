@@ -4,12 +4,12 @@ import React from 'react';
 import { Pokemon } from '../../../types/api';
 import { getMoveList, getPokemon } from '../../../helpers/api';
 
-import Sprite from '../../atoms/Sprite';
+import Sprite from '../../atoms/sprite';
 
-import AttributeList from '../../molecules/AttributeList';
-import MoveSection from '../../molecules/MoveSection';
-import NameSection from '../../molecules/NameSection';
-import StatSection from '../../molecules/StatSection';
+import AttributeList from '../../molecules/attribute-list';
+import MoveSection from '../../molecules/move-section';
+import NameSection from '../../molecules/name-section';
+import StatSection from '../../molecules/stat-section';
 
 const ErrorPanel = ({ error }: { error: Error | null }) =>
   error != null ? <div>{error.message}</div> : null;

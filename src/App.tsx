@@ -2,10 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React, { Suspense, useState } from 'react';
 
-import Panel from './components/organisms/Panel';
-import SelectionMenuSection from './components/organisms/SelectionMenuSection';
-import EmptySelectionSection from './components/atoms/EmptySelectionSection';
-import Loading from './components/atoms/Loading';
+import Panel from './components/organisms/panel';
+import SelectionMenuSection from './components/organisms/selection-menu-section';
+import EmptySelectionSection from './components/atoms/empty-selection-section';
+import Loading from './components/atoms/loading';
 
 const queryClient = new QueryClient();
 

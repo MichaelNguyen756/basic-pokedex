@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Title from '../../atoms/Title';
-import MoveTable from '../MoveTable';
+import Title from '../../atoms/title';
+import MoveTable from '../move-table';
 
 import { PokemonMove } from '../../../types/api';
 

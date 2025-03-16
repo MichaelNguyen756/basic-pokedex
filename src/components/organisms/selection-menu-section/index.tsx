@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
-import PokemonName from '../../molecules/PokemonName';
-import SelectionItem from '../../molecules/SelectionItem';
+import PokemonName from '../../molecules/pokemon-name';
+import SelectionItem from '../../molecules/selection-item';
 
 import { getPokemonURL } from '../../../helpers/api';
 

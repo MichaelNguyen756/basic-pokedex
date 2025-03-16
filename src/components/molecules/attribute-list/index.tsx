@@ -2,9 +2,9 @@ import React from 'react';
 
 import { getAbilities } from '../../../helpers/api';
 import type { PokemonType, PokemonAbility } from '../../../types/api';
-import TypeGroup from '../TypeGroup';
-import InfoRow from '../InfoRow';
-import DescriptionList from '../../atoms/DescriptionList';
+import TypeGroup from '../type-group';
+import InfoRow from '../info-row';
+import DescriptionList from '../../atoms/description-list';
 
 export default function AttributeList({
   abilities,

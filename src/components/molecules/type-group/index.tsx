@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TypeIcon from '../../atoms/TypeIcon';
+import TypeIcon from '../../atoms/type-icon';
 
 import { PokemonType } from '../../../types/api';
 
