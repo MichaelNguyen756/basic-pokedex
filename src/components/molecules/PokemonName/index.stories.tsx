@@ -2,11 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import PokemonName from '.';
 
-export default {
+const meta: Meta<typeof PokemonName> = {
   component: PokemonName,
   title: 'Molecules/Pokemon Name',
-} as Meta<typeof PokemonName>;
+};
 
+export default meta;
 type Story = StoryObj<typeof PokemonName>;
 
 export const Default: Story = {

@@ -4,15 +4,11 @@ import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
 
 import { toUpperFirst } from '../../../helpers';
 
-export type PokemonNameProps = {
-  name: string;
-};
-
 function isGenderSymbolMale(symbol: string) {
   return symbol === 'm';
 }
 
-export default function PokemonName({ name }: PokemonNameProps) {
+export default function PokemonName({ name }: { name: string }) {
   if (name.match(/nidoran/i)) {
     const [initialName, genderSymbol] = name.split('-');
     return (

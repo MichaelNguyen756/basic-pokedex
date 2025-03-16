@@ -1,24 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { Suspense, useState } from 'react';
 
 import Panel from './components/organisms/Panel';
-import InfoPanel from './components/organisms/InfoPanel';
 import SelectionMenuSection from './components/organisms/SelectionMenuSection';
 import EmptySelectionSection from './components/atoms/EmptySelectionSection';
-
-const StyledApp = styled.div`
-  text-align: center;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-`;
+import Loading from './components/atoms/Loading';
 
 const queryClient = new QueryClient();
 
@@ -29,15 +16,17 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StyledApp>
+      <main className="grid h-svh grid-cols-[max-content_1fr]">
         <SelectionMenuSection
           pokemonURL={pokemonUrl}
           handleClick={(url: string) => setPokemonUrl(url)}
         />
-        <InfoPanel $hasSelection={hasSelection}>
-          {hasSelection ? <Panel pokemonURL={pokemonUrl} /> : <EmptySelectionSection />}
-        </InfoPanel>
-      </StyledApp>
+        <section className="overflow-y-scroll">
+          <Suspense fallback={<Loading title="loading menu">Fetching info...</Loading>}>
+            {hasSelection ? <Panel pokemonURL={pokemonUrl} /> : <EmptySelectionSection />}
+          </Suspense>
+        </section>
+      </main>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

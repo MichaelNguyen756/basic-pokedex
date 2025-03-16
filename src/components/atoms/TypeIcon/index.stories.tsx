@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 import { POKEMON_TYPES } from '../../constants';
 
 import TypeIcon from '.';
 
-export default {
+const meta: Meta<typeof TypeIcon> = {
   component: TypeIcon,
   title: 'Atoms/Type Icon',
   argTypes: {
@@ -16,8 +17,19 @@ export default {
   args: {
     type: POKEMON_TYPES.BUG,
   },
-} as Meta<typeof TypeIcon>;
+  parameters: {
+    layout: 'centered',
+  },
+  decorators: [
+    Story => (
+      <div className="w-[200px]">
+        <Story />
+      </div>
+    ),
+  ],
+};
 
+export default meta;
 type Story = StoryObj<typeof TypeIcon>;
 
 export const Bug: Story = {

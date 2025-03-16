@@ -5,24 +5,24 @@ import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
 
 import App from './App';
-import { PokemonAPIURL } from './helpers/api';
+import { POKEMON_API_URL } from './helpers/api';
 
 const pokemonResults = {
   count: 3,
-  next: `${PokemonAPIURL}/pokemon?offset=20limit=20`,
+  next: `${POKEMON_API_URL}/pokemon?offset=20limit=20`,
   previous: null,
   results: [
     {
       name: 'bulbasaur',
-      url: `${PokemonAPIURL}/pokemon/1`,
+      url: `${POKEMON_API_URL}/pokemon/1`,
     },
     {
       name: 'ivysaur',
-      url: `${PokemonAPIURL}/pokemon/2`,
+      url: `${POKEMON_API_URL}/pokemon/2`,
     },
     {
       name: 'venusaur',
-      url: `${PokemonAPIURL}/pokemon/3`,
+      url: `${POKEMON_API_URL}/pokemon/3`,
     },
   ],
 };

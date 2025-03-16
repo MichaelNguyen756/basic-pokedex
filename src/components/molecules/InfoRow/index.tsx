@@ -1,18 +1,11 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import type { ReactNode } from 'react';
 
-export default function InfoRow({
-  className,
-  rowTitle,
-  children,
-}: {
-  className?: string;
-  rowTitle: string;
-  children: ReactNode;
-}) {
+export default function InfoRow({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <tr className={className}>
-      <th className="p-2">{rowTitle}</th>
-      <td className="p-2">{children}</td>
-    </tr>
+    <>
+      <dt className="p-2 text-center font-bold">{title}</dt>
+      <dd className="p-2 text-center">{children}</dd>
+    </>
   );
 }

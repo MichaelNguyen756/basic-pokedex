@@ -1,25 +1,25 @@
 import { http, HttpResponse } from 'msw';
 import { setupWorker } from 'msw/browser';
-import { PokemonAPIURL } from '../helpers/api';
+import { POKEMON_API_URL } from '../helpers/api';
 
 export const handlers = [
   http.get(`*/pokemon`, () => {
     return HttpResponse.json({
       count: 3,
-      next: `${PokemonAPIURL}/pokemon?offset=20limit=20`,
+      next: `${POKEMON_API_URL}/pokemon?offset=20limit=20`,
       previous: null,
       results: [
         {
           name: 'bulbasaur',
-          url: `${PokemonAPIURL}/pokemon/1`,
+          url: `${POKEMON_API_URL}/pokemon/1`,
         },
         {
           name: 'ivysaur',
-          url: `${PokemonAPIURL}/pokemon/2`,
+          url: `${POKEMON_API_URL}/pokemon/2`,
         },
         {
           name: 'venusaur',
-          url: `${PokemonAPIURL}/pokemon/3`,
+          url: `${POKEMON_API_URL}/pokemon/3`,
         },
       ],
     });
@@ -96,20 +96,20 @@ export const worker = setupWorker(
   http.get(`*/pokemon`, () => {
     return HttpResponse.json({
       count: 3,
-      next: `${PokemonAPIURL}/pokemon?offset=20limit=20`,
+      next: `${POKEMON_API_URL}/pokemon?offset=20limit=20`,
       previous: null,
       results: [
         {
           name: 'bulbasaur',
-          url: `${PokemonAPIURL}/pokemon/1`,
+          url: `${POKEMON_API_URL}/pokemon/1`,
         },
         {
           name: 'ivysaur',
-          url: `${PokemonAPIURL}/pokemon/2`,
+          url: `${POKEMON_API_URL}/pokemon/2`,
         },
         {
           name: 'venusaur',
-          url: `${PokemonAPIURL}/pokemon/3`,
+          url: `${POKEMON_API_URL}/pokemon/3`,
         },
       ],
     });

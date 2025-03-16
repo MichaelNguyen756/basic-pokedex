@@ -1,22 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import TypeIcon from '../../atoms/TypeIcon';
 
 import { PokemonType } from '../../../types/api';
 
-const Container = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
 export default function TypeGroup({ types }: { types: PokemonType[] }) {
   return (
-    <Container>
-      {types.map(({ type: { name } }, index) => (
-        <TypeIcon key={index} type={name} />
+    <div className="flex items-center justify-evenly">
+      {types.map(({ type: { name } }) => (
+        <TypeIcon key={name} type={name} />
       ))}
-    </Container>
+    </div>
   );
 }

@@ -1,62 +1,42 @@
-import { FetchStatus, QueryStatus, useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import React from 'react';
-import styled, { css } from 'styled-components';
 
 import { Pokemon } from '../../../types/api';
 import { getMoveList, getPokemon } from '../../../helpers/api';
 
-import Loading from '../../atoms/Loading';
 import Sprite from '../../atoms/Sprite';
 
-import AttributeTable from '../../molecules/AttributeTable';
+import AttributeList from '../../molecules/AttributeList';
 import MoveSection from '../../molecules/MoveSection';
 import NameSection from '../../molecules/NameSection';
-import StatSection from '../../molecules/StatTable';
-
-const Container = styled.section<{
-  $isLoading: boolean;
-}>`
-  display: flex;
-  flex-flow: column nowrap;
-  height: 100%;
-  width: 100%;
-
-  ${({ $isLoading }) =>
-    $isLoading &&
-    css`
-      align-items: center;
-      justify-content: center;
-    `}
-`;
-
-const LoadingPanel = ({ status }: { status: QueryStatus }) =>
-  status === 'pending' ? <Loading title="loading menu" text="Fetching info..." /> : null;
+import StatSection from '../../molecules/StatSection';
 
 const ErrorPanel = ({ error }: { error: Error | null }) =>
-  error !== null ? <div>{error.message}</div> : null;
+  error != null ? <div>{error.message}</div> : null;
 
 const PokemonData = ({ data }: { data: Pokemon | undefined }) =>
   !!data ? (
     <>
       <NameSection name={data.name} />
-      <Sprite spriteImg={data.sprites?.front_default} />
-      <AttributeTable types={data.types} abilities={data.abilities} />
-      <StatSection statList={data.stats} />
-      <MoveSection moveList={getMoveList(data.moves)} />
+      <article className="w-[80%]">
+        <Sprite sprites={data.sprites} />
+        <AttributeList types={data.types} abilities={data.abilities} />
+        <StatSection statList={data.stats} />
+        <MoveSection moveList={getMoveList(data.moves)} />
+      </article>
     </>
   ) : null;
 
 export default function Panel({ pokemonURL }: { pokemonURL: string }) {
-  const { status, data, error } = useQuery({
+  const { data, error } = useSuspenseQuery({
     queryKey: [pokemonURL],
     queryFn: () => getPokemon(pokemonURL),
   });
 
   return (
-    <Container title="Panel" $isLoading={status === 'pending'}>
+    <section className="flex w-full flex-col flex-nowrap items-center" title="Panel">
       <PokemonData data={data} />
-      <LoadingPanel status={status} />
       <ErrorPanel error={error} />
-    </Container>
+    </section>
   );
 }
